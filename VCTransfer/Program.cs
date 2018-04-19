@@ -23,9 +23,6 @@ namespace VCTransfer
             ReturnValue _result = new ReturnValue();
 
 
-            _result.ErrMessage = "aa";
-
-            VCBusiness.Common.ProcessError(_result, false);
 
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore();
             //_result = VeraCore.GetOrderShipmentInfo("28040617");
