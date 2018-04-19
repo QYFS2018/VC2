@@ -218,7 +218,7 @@ namespace VCBusiness
                 OrderedBy.City = order.D_CITY;
                 OrderedBy.CompanyName = order.D_COMPANY;
                 OrderedBy.Country = order.D_COUNTRY;
-                OrderedBy.Email = "";
+                OrderedBy.Email = order.D_EMAIL;
                 OrderedBy.FirstName = order.D_FIRSTNAME;
                 OrderedBy.LastName = order.D_LASTNAME;
                 OrderedBy.Phone = order.D_PHONE;
@@ -232,7 +232,7 @@ namespace VCBusiness
                 OrderedBy.City = order.B_CITY;
                 OrderedBy.CompanyName = order.B_COMPANY;
                 OrderedBy.Country = order.B_COUNTRY;
-                OrderedBy.Email = "";
+                OrderedBy.Email = order.B_EMAIL;
                 OrderedBy.FirstName = order.B_FIRSTNAME;
                 OrderedBy.LastName = order.B_LASTNAME;
                 OrderedBy.Phone = order.B_PHONE;
@@ -251,7 +251,7 @@ namespace VCBusiness
             OrderBillTo.City = order.D_CITY;
             OrderBillTo.CompanyName = order.D_COMPANY;
             OrderBillTo.Country = order.D_COUNTRY;
-            OrderBillTo.Email = "";
+            OrderBillTo.Email = order.D_EMAIL;
             OrderBillTo.FirstName = order.D_FIRSTNAME;
             OrderBillTo.LastName = order.D_LASTNAME;
             OrderBillTo.Phone = order.D_PHONE;
@@ -269,7 +269,7 @@ namespace VCBusiness
             OrderShipTo.City = orderItem.S_CITY;
             OrderShipTo.CompanyName = orderItem.S_COMPANY;
             OrderShipTo.Country = orderItem.S_COUNTRY;
-            OrderShipTo.Email = "";
+            OrderShipTo.Email = orderItem.S_EMAIL;
             OrderShipTo.FirstName = orderItem.S_FIRSTNAME;
             OrderShipTo.LastName = orderItem.S_LASTNAME;
             OrderShipTo.Phone = orderItem.S_PHONE;

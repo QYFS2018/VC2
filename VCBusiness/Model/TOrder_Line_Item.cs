@@ -187,7 +187,7 @@ namespace VCBusiness.Model
         private string _s_contact;
         private string _s_phone;
         private string _s_fax;
-
+        private string _s_email;
 
         [BindingField("S_COMPANY", true)]
         public string S_COMPANY
@@ -369,6 +369,19 @@ namespace VCBusiness.Model
                 return _s_fax;
             }
         }
+        [BindingField("S_EMAIL", true)]
+        public string S_EMAIL
+        {
+            set
+            {
+                _s_email = value;
+            }
+            get
+            {
+                return _s_email;
+            }
+        }
+
 
         private string _shipMethod;
         [BindingField("ShipMethod", true)]

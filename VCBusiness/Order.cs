@@ -228,39 +228,43 @@ namespace VCBusiness
 
                     #endregion
 
-                    #region sent shipment email
-
-                    #region get email content
-
-                    _result = EmailFactory.GetMailContent(order.OrderId, _tProgram_Email);
-                    if (_result.Success == false)
+                    if (Common.ShipConfirmEmail == true)
                     {
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
+                        #region sent shipment email
 
-                        Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+                        #region get email content
 
-                        continue;
+                        _result = EmailFactory.GetMailContent(order.OrderId, _tProgram_Email);
+                        if (_result.Success == false)
+                        {
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+
+                            Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+
+                            continue;
+                        }
+                        EmailMessage email = _result.ObjectValue as EmailMessage;
+
+                        #endregion
+
+                        #region sent email
+
+                        _result = EmailFactory.SentEmail(order.OrderId, email);
+                        if (_result.Success == false)
+                        {
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+
+                            Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
+
+                            continue;
+                        }
+                        #endregion
+
+                        #endregion
                     }
-                    EmailMessage email = _result.ObjectValue as EmailMessage;
 
-                    #endregion
-
-                    #region sent email
-
-                    _result = EmailFactory.SentEmail(order.OrderId, email);
-                    if (_result.Success == false)
-                    {
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
-
-                        Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
-
-                        continue;
-                    }
-                    #endregion
-
-                    #endregion
 
                     successfulRecord++;
                     Common.Log("Order : " + order.OrderId + "---OK");
