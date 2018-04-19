@@ -1,0 +1,41 @@
+2018/3/14 12:54:42
+OID:AUSBK17-060
+Type:GetInventory
+Success:True
+Request:FIBICL--AUSBK17-060
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfProductAvailabilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProductAvailabilities>
+    <Warehouses xmlns="http://omscom/">
+      <WarehouseLevels>
+        <Warehouse>
+          <ID>GBLWMS</ID>
+          <OverrideAllowHistoricalConnection>false</OverrideAllowHistoricalConnection>
+        </Warehouse>
+        <PartNumber>AUSBK17-060</PartNumber>
+        <PartDescription>The Austin Black Patent- Size 6</PartDescription>
+        <Size />
+        <Color />
+        <ProductType>Product</ProductType>
+        <OnHand>10</OnHand>
+        <Reserved>0</Reserved>
+        <Marked>0</Marked>
+        <Backordered>0</Backordered>
+        <Needed>0</Needed>
+        <Unavailable>0</Unavailable>
+        <Expected>0</Expected>
+        <OnOrder>0</OnOrder>
+        <Available>10</Available>
+        <TotalReserved>0</TotalReserved>
+      </WarehouseLevels>
+    </Warehouses>
+  </ProductAvailabilities>
+</ArrayOfProductAvailabilities>
+
+Note:
+
+
+
+
+

@@ -1,0 +1,344 @@
+2018/3/15 9:48:19
+OID:28039624
+Type:GetOrderShipmentInfo
+Success:True
+Request:28039624
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<OrderInqRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OrdHead xmlns="http://omscom/">
+    <OrderId>28039624</OrderId>
+    <EntryDate>2018-03-12T17:19:00</EntryDate>
+    <UploadDate>2018-03-12T18:18:50</UploadDate>
+    <View>Default</View>
+    <Stream>Default Order Stream</Stream>
+    <Status>
+      <Unapproved>false</Unapproved>
+      <Unprocessed>false</Unprocessed>
+      <Accepted>false</Accepted>
+      <Hold>false</Hold>
+      <DeniedCredit>false</DeniedCredit>
+      <Processed>true</Processed>
+      <Pending>false</Pending>
+      <Picked>false</Picked>
+      <Backordered>false</Backordered>
+      <Shipped>true</Shipped>
+      <Canceled>false</Canceled>
+      <Complete>true</Complete>
+    </Status>
+    <ShipHandCharge>0</ShipHandCharge>
+    <AdditionalCharge>0</AdditionalCharge>
+    <DiscountPct>0</DiscountPct>
+    <TaxPct>0</TaxPct>
+    <SpecialHandCharge>0</SpecialHandCharge>
+    <ShippingOptionCharge>0</ShippingOptionCharge>
+  </OrdHead>
+  <ShipToInfo xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </ShipToInfo>
+  <OrderedBy xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </OrderedBy>
+  <BillToInfo xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </BillToInfo>
+  <OfferInfo xmlns="http://omscom/">
+    <OfferType>
+      <OfferId>ELVGD18-060</OfferId>
+      <OfferDesc>Elva Gold - Size 6</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>MARBB18-060</OfferId>
+      <OfferDesc>Marissa - Size 6</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+  </OfferInfo>
+  <BillOfMaterials xmlns="http://omscom/">
+    <BOMProductType>
+      <ProductId>ELVGD18-060</ProductId>
+      <ProductDesc>Elva Gold - Size 6</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>MARBB18-060</ProductId>
+      <ProductDesc>Marissa - Size 6</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+  </BillOfMaterials>
+  <ShippingOrders xmlns="http://omscom/">
+    <PickPackType>
+      <PickPackId>12</PickPackId>
+      <Status>Canceled</Status>
+      <DatePicked>0001-01-01T00:00:00</DatePicked>
+      <MerchAmt>0</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>ELVGD18-060</ProductId>
+          <ProductDesc>Elva Gold - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>MARBB18-060</ProductId>
+          <ProductDesc>Marissa - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages />
+    </PickPackType>
+    <PickPackType>
+      <PickSlipID>17389</PickSlipID>
+      <PickPackId>74</PickPackId>
+      <Status>Complete</Status>
+      <DatePicked>2018-03-13T16:05:05</DatePicked>
+      <MerchAmt>0</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>ELVGD18-060</ProductId>
+          <ProductDesc>Elva Gold - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>MARBB18-060</ProductId>
+          <ProductDesc>Marissa - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages>
+        <PackagesType>
+          <PackageType>12X12X6</PackageType>
+          <DatePacked>2018-03-13T15:04:56</DatePacked>
+          <DateShipped>2018-03-13T00:00:00</DateShipped>
+          <DateVoided>0001-01-01T00:00:00</DateVoided>
+          <Carrier>USPS</Carrier>
+          <Service>3RD DAY</Service>
+          <ActualService>Priority Mail</ActualService>
+          <Weight>4.070000171661377</Weight>
+          <ActualFreight>7.19</ActualFreight>
+          <ActualAdditionalChg>0</ActualAdditionalChg>
+          <TrackingId>9405510898447006361592</TrackingId>
+          <InsuredValue>0</InsuredValue>
+        </PackagesType>
+      </Packages>
+    </PickPackType>
+  </ShippingOrders>
+</OrderInqRecord>
+
+Note:
+
+
+
+
+
+2018/3/15 9:50:17
+OID:28039624
+Type:GetOrderShipmentInfo
+Success:True
+Request:28039624
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<OrderInqRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OrdHead xmlns="http://omscom/">
+    <OrderId>28039624</OrderId>
+    <EntryDate>2018-03-12T17:19:00</EntryDate>
+    <UploadDate>2018-03-12T18:18:50</UploadDate>
+    <View>Default</View>
+    <Stream>Default Order Stream</Stream>
+    <Status>
+      <Unapproved>false</Unapproved>
+      <Unprocessed>false</Unprocessed>
+      <Accepted>false</Accepted>
+      <Hold>false</Hold>
+      <DeniedCredit>false</DeniedCredit>
+      <Processed>true</Processed>
+      <Pending>false</Pending>
+      <Picked>false</Picked>
+      <Backordered>false</Backordered>
+      <Shipped>true</Shipped>
+      <Canceled>false</Canceled>
+      <Complete>true</Complete>
+    </Status>
+    <ShipHandCharge>0</ShipHandCharge>
+    <AdditionalCharge>0</AdditionalCharge>
+    <DiscountPct>0</DiscountPct>
+    <TaxPct>0</TaxPct>
+    <SpecialHandCharge>0</SpecialHandCharge>
+    <ShippingOptionCharge>0</ShippingOptionCharge>
+  </OrdHead>
+  <ShipToInfo xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </ShipToInfo>
+  <OrderedBy xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </OrderedBy>
+  <BillToInfo xmlns="http://omscom/">
+    <Contact>LeBlanc, Stacey</Contact>
+    <Address1>23418 Perla Verde Terrace Cir.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+    <Phone>(832) 766-9693</Phone>
+  </BillToInfo>
+  <OfferInfo xmlns="http://omscom/">
+    <OfferType>
+      <OfferId>ELVGD18-060</OfferId>
+      <OfferDesc>Elva Gold - Size 6</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>MARBB18-060</OfferId>
+      <OfferDesc>Marissa - Size 6</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+  </OfferInfo>
+  <BillOfMaterials xmlns="http://omscom/">
+    <BOMProductType>
+      <ProductId>ELVGD18-060</ProductId>
+      <ProductDesc>Elva Gold - Size 6</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>MARBB18-060</ProductId>
+      <ProductDesc>Marissa - Size 6</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+  </BillOfMaterials>
+  <ShippingOrders xmlns="http://omscom/">
+    <PickPackType>
+      <PickPackId>12</PickPackId>
+      <Status>Canceled</Status>
+      <DatePicked>0001-01-01T00:00:00</DatePicked>
+      <MerchAmt>0</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>ELVGD18-060</ProductId>
+          <ProductDesc>Elva Gold - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>MARBB18-060</ProductId>
+          <ProductDesc>Marissa - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages />
+    </PickPackType>
+    <PickPackType>
+      <PickSlipID>17389</PickSlipID>
+      <PickPackId>74</PickPackId>
+      <Status>Complete</Status>
+      <DatePicked>2018-03-13T16:05:05</DatePicked>
+      <MerchAmt>0</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>ELVGD18-060</ProductId>
+          <ProductDesc>Elva Gold - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>MARBB18-060</ProductId>
+          <ProductDesc>Marissa - Size 6</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages>
+        <PackagesType>
+          <PackageType>12X12X6</PackageType>
+          <DatePacked>2018-03-13T15:04:56</DatePacked>
+          <DateShipped>2018-03-13T00:00:00</DateShipped>
+          <DateVoided>0001-01-01T00:00:00</DateVoided>
+          <Carrier>USPS</Carrier>
+          <Service>3RD DAY</Service>
+          <ActualService>Priority Mail</ActualService>
+          <Weight>4.070000171661377</Weight>
+          <ActualFreight>7.19</ActualFreight>
+          <ActualAdditionalChg>0</ActualAdditionalChg>
+          <TrackingId>9405510898447006361592</TrackingId>
+          <InsuredValue>0</InsuredValue>
+        </PackagesType>
+      </Packages>
+    </PickPackType>
+  </ShippingOrders>
+</OrderInqRecord>
+
+Note:
+
+
+
+
+

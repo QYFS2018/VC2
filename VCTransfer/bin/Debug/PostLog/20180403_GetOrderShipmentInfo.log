@@ -1,0 +1,571 @@
+2018/4/3 9:54:55
+OID:28041454
+Type:GetOrderShipmentInfo
+Success:True
+Request:28041454
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<OrderInqRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OrdHead xmlns="http://omscom/">
+    <OrderId>28041454</OrderId>
+    <EntryDate>2018-04-02T06:00:04</EntryDate>
+    <UploadDate>2018-04-02T05:00:03</UploadDate>
+    <View>Default</View>
+    <Stream>Default Order Stream</Stream>
+    <ReferenceNo>28041454</ReferenceNo>
+    <CampaignId>rhondachapman2351</CampaignId>
+    <Carrier>UPS</Carrier>
+    <Service>STANDARD</Service>
+    <Status>
+      <Unapproved>false</Unapproved>
+      <Unprocessed>false</Unprocessed>
+      <Accepted>false</Accepted>
+      <Hold>false</Hold>
+      <DeniedCredit>false</DeniedCredit>
+      <Processed>true</Processed>
+      <Pending>true</Pending>
+      <Picked>false</Picked>
+      <Backordered>false</Backordered>
+      <Shipped>false</Shipped>
+      <Canceled>false</Canceled>
+      <Complete>false</Complete>
+    </Status>
+    <ShipHandCharge>0</ShipHandCharge>
+    <AdditionalCharge>0</AdditionalCharge>
+    <DiscountPct>0</DiscountPct>
+    <TaxPct>0</TaxPct>
+    <SpecialHandCharge>0</SpecialHandCharge>
+    <ShippingOptionCharge>0</ShippingOptionCharge>
+  </OrdHead>
+  <ShipToInfo xmlns="http://omscom/">
+    <Contact>rhonda chapman</Contact>
+    <Address1>234 holmwood st</Address1>
+    <City>JASPER</City>
+    <State>TX</State>
+    <PostalCode>75951</PostalCode>
+    <Country>US</Country>
+  </ShipToInfo>
+  <OrderedBy xmlns="http://omscom/">
+    <Contact>chapman rhonda</Contact>
+    <Address1>234 holmwood st</Address1>
+    <City>JASPER</City>
+    <State>TX</State>
+    <PostalCode>75951</PostalCode>
+    <Country>US</Country>
+  </OrderedBy>
+  <BillToInfo xmlns="http://omscom/">
+    <Contact>Chapman Rhonda</Contact>
+    <Address1>234 Holmwood, Jasper Tx</Address1>
+    <City>JASPER</City>
+    <State>TX</State>
+    <PostalCode>75951</PostalCode>
+  </BillToInfo>
+  <OfferInfo xmlns="http://omscom/">
+    <OfferType>
+      <OfferId>Overage</OfferId>
+      <OfferDesc>Overage</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>6.58</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>EVEBK18-090</OfferId>
+      <OfferDesc>Evelyn - Size 9</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>OLIBR18-090</OfferId>
+      <OfferDesc>Olivia - Size 9</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>KITBK17-090</OfferId>
+      <OfferDesc>Kitten Ears Black - Size 9                        </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>17.5</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>ELVGD18-080</OfferId>
+      <OfferDesc>Elva Gold - Size 8</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>33.75</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>JUABR18-090</OfferId>
+      <OfferDesc>Juanita - Size 9</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>33.75</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>MARBB18-090</OfferId>
+      <OfferDesc>Marissa - Size 9</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>37.25</UnitPrice>
+    </OfferType>
+  </OfferInfo>
+  <BillOfMaterials xmlns="http://omscom/">
+    <BOMProductType>
+      <ProductId>ELVGD18-080</ProductId>
+      <ProductDesc>Elva Gold - Size 8</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>EVEBK18-090</ProductId>
+      <ProductDesc>Evelyn - Size 9</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>JUABR18-090</ProductId>
+      <ProductDesc>Juanita - Size 9</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>KITBK17-090</ProductId>
+      <ProductDesc>Kitten Ears Black - Size 9                        </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>MARBB18-090</ProductId>
+      <ProductDesc>Marissa - Size 9</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>OLIBR18-090</ProductId>
+      <ProductDesc>Olivia - Size 9</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>Overage</ProductId>
+      <ProductDesc>Overage</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>1</MarkedQty>
+      <PulledQty>0</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+  </BillOfMaterials>
+  <ShippingOrders xmlns="http://omscom/">
+    <PickPackType>
+      <PickSlipID>21690</PickSlipID>
+      <PickPackId>332</PickPackId>
+      <Status>Marked</Status>
+      <DatePicked>0001-01-01T00:00:00</DatePicked>
+      <MerchAmt>128.83</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>Overage</ProductId>
+          <ProductDesc>Overage</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>EVEBK18-090</ProductId>
+          <ProductDesc>Evelyn - Size 9</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>OLIBR18-090</ProductId>
+          <ProductDesc>Olivia - Size 9</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>KITBK17-090</ProductId>
+          <ProductDesc>Kitten Ears Black - Size 9                        </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>ELVGD18-080</ProductId>
+          <ProductDesc>Elva Gold - Size 8</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>JUABR18-090</ProductId>
+          <ProductDesc>Juanita - Size 9</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>MARBB18-090</ProductId>
+          <ProductDesc>Marissa - Size 9</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages />
+    </PickPackType>
+  </ShippingOrders>
+</OrderInqRecord>
+
+Note:
+
+
+
+
+
+2018/4/3 16:25:02
+OID:28041050
+Type:GetOrderShipmentInfo
+Success:True
+Request:28041050
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<OrderInqRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OrdHead xmlns="http://omscom/">
+    <OrderId>28041050</OrderId>
+    <EntryDate>2018-03-17T19:00:05</EntryDate>
+    <UploadDate>2018-03-17T17:59:59</UploadDate>
+    <View>Default</View>
+    <Stream>Default Order Stream</Stream>
+    <ReferenceNo>28041050</ReferenceNo>
+    <CampaignId>AndreaGillentine2359</CampaignId>
+    <Carrier>UPS</Carrier>
+    <Service>STANDARD</Service>
+    <Status>
+      <Unapproved>false</Unapproved>
+      <Unprocessed>false</Unprocessed>
+      <Accepted>false</Accepted>
+      <Hold>false</Hold>
+      <DeniedCredit>false</DeniedCredit>
+      <Processed>true</Processed>
+      <Pending>false</Pending>
+      <Picked>false</Picked>
+      <Backordered>false</Backordered>
+      <Shipped>true</Shipped>
+      <Canceled>false</Canceled>
+      <Complete>true</Complete>
+    </Status>
+    <ShipHandCharge>0</ShipHandCharge>
+    <AdditionalCharge>0</AdditionalCharge>
+    <DiscountPct>0</DiscountPct>
+    <TaxPct>0</TaxPct>
+    <SpecialHandCharge>0</SpecialHandCharge>
+    <ShippingOptionCharge>0</ShippingOptionCharge>
+  </OrdHead>
+  <ShipToInfo xmlns="http://omscom/">
+    <Contact>Adela Gillentine</Contact>
+    <Address1>3210 Brant St.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+    <Country>US</Country>
+  </ShipToInfo>
+  <OrderedBy xmlns="http://omscom/">
+    <Contact>Gillentine Adela</Contact>
+    <Address1>923 Weeping Willow Way</Address1>
+    <City>DECKER PRAIRIE</City>
+    <State>TX</State>
+    <PostalCode>77354</PostalCode>
+    <Country>US</Country>
+  </OrderedBy>
+  <BillToInfo xmlns="http://omscom/">
+    <Contact>Gillentine Andrea</Contact>
+    <Address1>3210 Brant St.</Address1>
+    <City>KATY</City>
+    <State>TX</State>
+    <PostalCode>77493</PostalCode>
+  </BillToInfo>
+  <OfferInfo xmlns="http://omscom/">
+    <OfferType>
+      <OfferId>CAPBK17-090</OfferId>
+      <OfferDesc>Cape Jelly- Size 9                                </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>35</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>TROBK17-090</OfferId>
+      <OfferDesc>Tropez Jelly- Size 9                              </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>35</UnitPrice>
+    </OfferType>
+  </OfferInfo>
+  <BillOfMaterials xmlns="http://omscom/">
+    <BOMProductType>
+      <ProductId>CAPBK17-090</ProductId>
+      <ProductDesc>Cape Jelly- Size 9                                </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>TROBK17-090</ProductId>
+      <ProductDesc>Tropez Jelly- Size 9                              </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+  </BillOfMaterials>
+  <ShippingOrders xmlns="http://omscom/">
+    <PickPackType>
+      <PickSlipID>18937</PickSlipID>
+      <PickPackId>187</PickPackId>
+      <Status>Complete</Status>
+      <DatePicked>2018-03-20T13:04:02</DatePicked>
+      <MerchAmt>70</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>CAPBK17-090</ProductId>
+          <ProductDesc>Cape Jelly- Size 9                                </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>TROBK17-090</ProductId>
+          <ProductDesc>Tropez Jelly- Size 9                              </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages>
+        <PackagesType>
+          <PackageType>12X12X6</PackageType>
+          <DatePacked>2018-03-20T12:03:58</DatePacked>
+          <DateShipped>2018-03-20T00:00:00</DateShipped>
+          <DateVoided>0001-01-01T00:00:00</DateVoided>
+          <Carrier>OTHER</Carrier>
+          <Weight>3.5</Weight>
+          <ActualFreight>0</ActualFreight>
+          <ActualAdditionalChg>0</ActualAdditionalChg>
+          <TrackingId>92612909837622511006002104</TrackingId>
+          <InsuredValue>0</InsuredValue>
+        </PackagesType>
+      </Packages>
+    </PickPackType>
+  </ShippingOrders>
+</OrderInqRecord>
+
+Note:
+
+
+
+
+
+2018/4/3 16:25:54
+OID:28040617
+Type:GetOrderShipmentInfo
+Success:True
+Request:28040617
+
+Response:<?xml version="1.0" encoding="utf-16"?>
+<OrderInqRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OrdHead xmlns="http://omscom/">
+    <OrderId>28040617</OrderId>
+    <EntryDate>2018-03-12T17:19:00</EntryDate>
+    <UploadDate>2018-03-12T18:18:51</UploadDate>
+    <View>Default</View>
+    <Stream>Default Order Stream</Stream>
+    <Status>
+      <Unapproved>false</Unapproved>
+      <Unprocessed>false</Unprocessed>
+      <Accepted>false</Accepted>
+      <Hold>false</Hold>
+      <DeniedCredit>false</DeniedCredit>
+      <Processed>true</Processed>
+      <Pending>false</Pending>
+      <Picked>false</Picked>
+      <Backordered>false</Backordered>
+      <Shipped>true</Shipped>
+      <Canceled>false</Canceled>
+      <Complete>true</Complete>
+    </Status>
+    <ShipHandCharge>0</ShipHandCharge>
+    <AdditionalCharge>0</AdditionalCharge>
+    <DiscountPct>0</DiscountPct>
+    <TaxPct>0</TaxPct>
+    <SpecialHandCharge>0</SpecialHandCharge>
+    <ShippingOptionCharge>0</ShippingOptionCharge>
+  </OrdHead>
+  <ShipToInfo xmlns="http://omscom/">
+    <Contact>Cannady, Amy</Contact>
+    <Address1>2321 Stonebridge Dr</Address1>
+    <City>ORANGE PARK</City>
+    <State>FL</State>
+    <PostalCode>32065</PostalCode>
+    <Country>US</Country>
+  </ShipToInfo>
+  <OrderedBy xmlns="http://omscom/">
+    <Contact>Cannady, Amy</Contact>
+    <Address1>2321 Stonebridge Dr</Address1>
+    <City>ORANGE PARK</City>
+    <State>FL</State>
+    <PostalCode>32065</PostalCode>
+    <Country>US</Country>
+  </OrderedBy>
+  <BillToInfo xmlns="http://omscom/">
+    <Contact>Cannady, Amy</Contact>
+    <Address1>2321 Stonebridge Dr</Address1>
+    <City>ORANGE PARK</City>
+    <State>FL</State>
+    <PostalCode>32065</PostalCode>
+    <Country>US</Country>
+  </BillToInfo>
+  <OfferInfo xmlns="http://omscom/">
+    <OfferType>
+      <OfferId>5THBK17-090</OfferId>
+      <OfferDesc>5th Avenue Black Patent- Size 9</OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>KITWT17-090</OfferId>
+      <OfferDesc>Kitten Ears White - Size 9                        </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>CENGY17-090</OfferId>
+      <OfferDesc>Central Park Grey- Size 9                         </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+    <OfferType>
+      <OfferId>KITBK17-090</OfferId>
+      <OfferDesc>Kitten Ears Black - Size 9                        </OfferDesc>
+      <OrderQty>1</OrderQty>
+      <UnitPrice>0</UnitPrice>
+    </OfferType>
+  </OfferInfo>
+  <BillOfMaterials xmlns="http://omscom/">
+    <BOMProductType>
+      <ProductId>5THBK17-090</ProductId>
+      <ProductDesc>5th Avenue Black Patent- Size 9</ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>CENGY17-090</ProductId>
+      <ProductDesc>Central Park Grey- Size 9                         </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>KITBK17-090</ProductId>
+      <ProductDesc>Kitten Ears Black - Size 9                        </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+    <BOMProductType>
+      <ProductId>KITWT17-090</ProductId>
+      <ProductDesc>Kitten Ears White - Size 9                        </ProductDesc>
+      <OrderQty>1</OrderQty>
+      <ReservedQty>0</ReservedQty>
+      <MarkedQty>0</MarkedQty>
+      <PulledQty>1</PulledQty>
+      <CanceledQty>0</CanceledQty>
+      <BackorderQty>0</BackorderQty>
+    </BOMProductType>
+  </BillOfMaterials>
+  <ShippingOrders xmlns="http://omscom/">
+    <PickPackType>
+      <PickSlipID>17390</PickSlipID>
+      <PickPackId>75</PickPackId>
+      <Status>Complete</Status>
+      <DatePicked>2018-03-13T20:49:19</DatePicked>
+      <MerchAmt>0</MerchAmt>
+      <ShipHandAmt>0</ShipHandAmt>
+      <TaxAmt>0</TaxAmt>
+      <DiscountAmt>0</DiscountAmt>
+      <SpecialHandling>0</SpecialHandling>
+      <AdditionalCharge>0</AdditionalCharge>
+      <PickPackProducts>
+        <PickPackProductType>
+          <ProductId>5THBK17-090</ProductId>
+          <ProductDesc>5th Avenue Black Patent- Size 9</ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>KITWT17-090</ProductId>
+          <ProductDesc>Kitten Ears White - Size 9                        </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>CENGY17-090</ProductId>
+          <ProductDesc>Central Park Grey- Size 9                         </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+        <PickPackProductType>
+          <ProductId>KITBK17-090</ProductId>
+          <ProductDesc>Kitten Ears Black - Size 9                        </ProductDesc>
+          <ToShipQty>1</ToShipQty>
+        </PickPackProductType>
+      </PickPackProducts>
+      <Packages>
+        <PackagesType>
+          <PackageType>MAILER #6</PackageType>
+          <DatePacked>2018-03-13T19:49:18</DatePacked>
+          <DateShipped>2018-03-13T21:38:37</DateShipped>
+          <DateVoided>0001-01-01T00:00:00</DateVoided>
+          <Carrier>USPS</Carrier>
+          <Service>3RD DAY</Service>
+          <ActualService>Priority Mail</ActualService>
+          <Weight>80</Weight>
+          <ActualFreight>0</ActualFreight>
+          <ActualAdditionalChg>0</ActualAdditionalChg>
+          <TrackingId>9405510898447006362797</TrackingId>
+          <InsuredValue>0</InsuredValue>
+        </PackagesType>
+      </Packages>
+    </PickPackType>
+  </ShippingOrders>
+</OrderInqRecord>
+
+Note:
+
+
+
+
+

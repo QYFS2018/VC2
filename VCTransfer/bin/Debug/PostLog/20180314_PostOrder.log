@@ -1,0 +1,180 @@
+2018/3/14 11:23:17
+OID:28000304
+Type:PostOrder
+Success:False
+Request:<?xml version="1.0" encoding="utf-16"?>
+<Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Header xmlns="http://omscom/">
+    <ID>28000304</ID>
+    <EntryDate>2018-03-14T11:23:02.1574587+08:00</EntryDate>
+    <ReferenceNumber>28000299</ReferenceNumber>
+    <InsertDate>2018-03-14T11:23:02.1574587+08:00</InsertDate>
+    <UTCEntryDateTime xsi:nil="true" />
+  </Header>
+  <Classification xmlns="http://omscom/">
+    <CampaignID>test111ss31</CampaignID>
+  </Classification>
+  <OrderedBy xmlns="http://omscom/">
+    <FirstName>Wu</FirstName>
+    <LastName>Dongmei</LastName>
+    <CompanyName />
+    <Address1>16406 Haden crest ct</Address1>
+    <Address2 />
+    <City>CYPRESS</City>
+    <State>TX</State>
+    <PostalCode>77429</PostalCode>
+    <Country>US</Country>
+    <Email />
+    <TaxExempt xsi:nil="true" />
+    <TaxExemptApproved xsi:nil="true" />
+    <Commercial xsi:nil="true" />
+  </OrderedBy>
+  <ShipTo xmlns="http://omscom/">
+    <OrderShipTo>
+      <Address1>fewaefwa</Address1>
+      <City>BAMMEL</City>
+      <State>TX</State>
+      <PostalCode>77040</PostalCode>
+      <Country>US</Country>
+      <Email />
+      <TaxExempt xsi:nil="true" />
+      <TaxExemptApproved xsi:nil="true" />
+      <Commercial xsi:nil="true" />
+      <SeqID xsi:nil="true" />
+      <Flag>Other</Flag>
+      <Key>0</Key>
+      <ReleaseDate xsi:nil="true" />
+      <Rush xsi:nil="true" />
+      <RushHandling xsi:nil="true" />
+      <FreightCarrier>
+        <Name>UPS</Name>
+      </FreightCarrier>
+      <FreightService>
+        <Description>Standard</Description>
+      </FreightService>
+      <ThirdPartyType xsi:nil="true" />
+      <SpecialHandlingCharge xsi:nil="true" />
+      <ShippingHandlingCharge xsi:nil="true" />
+      <ShippingHandlingTaxAmount xsi:nil="true" />
+      <ShippingHandlingTaxPercent xsi:nil="true" />
+    </OrderShipTo>
+  </ShipTo>
+  <BillTo xmlns="http://omscom/">
+    <FirstName>clo</FirstName>
+    <LastName>fibi</LastName>
+    <CompanyName />
+    <Address1>150 Myrtle Avenue</Address1>
+    <Address2 />
+    <City>BROOKLYN</City>
+    <State>NY</State>
+    <PostalCode>11201</PostalCode>
+    <Country>US</Country>
+    <Email />
+    <TaxExempt xsi:nil="true" />
+    <TaxExemptApproved xsi:nil="true" />
+    <Commercial xsi:nil="true" />
+    <Flag>Other</Flag>
+  </BillTo>
+  <Offers xmlns="http://omscom/">
+    <OfferOrdered>
+      <Offer>
+        <Header>
+          <SeqID xsi:nil="true" />
+          <ID>AUSBK17-060</ID>
+        </Header>
+      </Offer>
+      <Quantity>3</Quantity>
+      <CanceledQuantity xsi:nil="true" />
+      <OrderShipTo>
+        <Key>0</Key>
+      </OrderShipTo>
+      <PriceType xsi:nil="true" />
+      <UnitPrice>0</UnitPrice>
+      <ShipType xsi:nil="true" />
+      <ShippingHandling xsi:nil="true" />
+      <Discounts xsi:nil="true" />
+      <DiscountPercent xsi:nil="true" />
+      <SeqID xsi:nil="true" />
+      <CloneLine xsi:nil="true" />
+      <Unapproved xsi:nil="true" />
+      <Recurring xsi:nil="true" />
+      <LineNumber>0</LineNumber>
+      <ProductDetails>
+        <OrderProductDetail>
+          <PartNumber>AUSBK17-060</PartNumber>
+          <QuantityFactor xsi:nil="true" />
+          <Quantity xsi:nil="true" />
+        </OrderProductDetail>
+      </ProductDetails>
+      <LineTaxPercent xsi:nil="true" />
+      <ShippingHandlingTaxPercent xsi:nil="true" />
+      <LineTaxAmount>0</LineTaxAmount>
+    </OfferOrdered>
+    <OfferOrdered>
+      <Offer>
+        <Header>
+          <SeqID xsi:nil="true" />
+          <ID>AUSBK17-060</ID>
+        </Header>
+      </Offer>
+      <Quantity>1</Quantity>
+      <CanceledQuantity xsi:nil="true" />
+      <OrderShipTo>
+        <Key>0</Key>
+      </OrderShipTo>
+      <PriceType xsi:nil="true" />
+      <UnitPrice>55.25</UnitPrice>
+      <ShipType xsi:nil="true" />
+      <ShippingHandling xsi:nil="true" />
+      <Discounts xsi:nil="true" />
+      <DiscountPercent xsi:nil="true" />
+      <SeqID xsi:nil="true" />
+      <CloneLine xsi:nil="true" />
+      <Unapproved xsi:nil="true" />
+      <Recurring xsi:nil="true" />
+      <LineNumber>1</LineNumber>
+      <ProductDetails>
+        <OrderProductDetail>
+          <PartNumber>AUSBK17-060</PartNumber>
+          <QuantityFactor xsi:nil="true" />
+          <Quantity xsi:nil="true" />
+        </OrderProductDetail>
+      </ProductDetails>
+      <LineTaxPercent xsi:nil="true" />
+      <ShippingHandlingTaxPercent xsi:nil="true" />
+      <LineTaxAmount>0</LineTaxAmount>
+    </OfferOrdered>
+  </Offers>
+</Order>
+
+Response:
+
+Note:System.ServiceModel.EndpointNotFoundException: 没有终结点在侦听可以接受消息的 https://rhu239.veracore.com/pmomsws/oms.asmx。这通常是由于不正确的地址或者 SOAP 操作导致的。如果存在此情况，请参见 InnerException 以了解详细信息。 ---> System.Net.WebException: 未能解析此远程名称: 'rhu239.veracore.com'
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- 内部异常堆栈跟踪的结尾 ---
+
+Server stack trace: 
+   在 System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   在 System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   在 System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   在 System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   在 System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   在 System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   在 System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   在 VCBusiness.VeraCoreOMS.OMSSoap.AddOrder(AddOrderRequest request)
+   在 VCBusiness.VeraCoreOMS.OMSSoapClient.VCBusiness.VeraCoreOMS.OMSSoap.AddOrder(AddOrderRequest request) 位置 E:\SMQ\VeraCore\Code\VCBusiness\Service References\VeraCoreOMS\Reference.cs:行号 30730
+   在 VCBusiness.VeraCoreOMS.OMSSoapClient.AddOrder(AuthenticationHeader AuthenticationHeader, DebugHeader& DebugHeader, Order order) 位置 E:\SMQ\VeraCore\Code\VCBusiness\Service References\VeraCoreOMS\Reference.cs:行号 30738
+   在 VCBusiness.VeraCore.PostOrder(TOrder order, EntityList orderline) 位置 E:\SMQ\VeraCore\Code\VCBusiness\VeraCore.cs:行号 311
+
+
+
+
+
