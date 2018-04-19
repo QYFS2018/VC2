@@ -1,0 +1,7 @@
+E:\Git\VCTransfer\WComm\bin\Debug\WComm.dll
+E:\Git\VCTransfer\WComm\bin\Debug\WComm.pdb
+E:\Git\VCTransfer\WComm\bin\Debug\Mono.Security.dll
+E:\Git\VCTransfer\WComm\bin\Debug\Npgsql.dll
+E:\Git\VCTransfer\WComm\obj\Debug\WComm.csprojResolveAssemblyReference.cache
+E:\Git\VCTransfer\WComm\obj\Debug\WComm.dll
+E:\Git\VCTransfer\WComm\obj\Debug\WComm.pdb
