@@ -298,5 +298,13 @@ namespace VCBusiness
             }
         }
 
+        public static bool ShipConfirmEmail
+        {
+            get
+            {
+                return bool.Parse(System.Configuration.ConfigurationSettings.AppSettings["ShipConfirmEmail"].ToString());
+            }
+        }
+
     }
 }
