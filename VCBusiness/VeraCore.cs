@@ -9,6 +9,8 @@ using System.IO;
 using System.Collections;
 using VCBusiness.VeraCoreOMS;
 using VCBusiness.Model;
+using System.Net;
+
 
 namespace VCBusiness
 {
@@ -29,6 +31,10 @@ namespace VCBusiness
 
             AuthenticationHeader.Username = VCBusiness.Common.VeraCoreUserName;
             AuthenticationHeader.Password = VCBusiness.Common.VeraCorePassword;
+
+
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
         }
 
         public ReturnValue GetInventory(string owner,string sku)
@@ -64,7 +70,6 @@ namespace VCBusiness
         public ReturnValue PostProduct(string owner, string sku, string title)
         {
             ReturnValue _result = new ReturnValue();
-
 
             VCBusiness.VeraCoreOMS.Product product = new VCBusiness.VeraCoreOMS.Product();
             product.Header = new VCBusiness.VeraCoreOMS.ProductHeader();
@@ -153,6 +158,7 @@ namespace VCBusiness
         public ReturnValue GetOrderShipmentInfo(string orderid)
         {
             ReturnValue _result = new ReturnValue();
+
 
             try
             {
