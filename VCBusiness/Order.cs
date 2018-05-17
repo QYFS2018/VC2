@@ -323,39 +323,59 @@ namespace VCBusiness
 
                 if (Common.ShipConfirmEmail == true)
                 {
-                    #region sent shipment email
+                    #region check already sent email
 
-                    #region get email content
-
-                    _result = EmailFactory.GetMailContent(order.OrderId,releaseID-1, _tProgram_Email);
+                    App_Log_Mail _app_Log_Mail = new App_Log_Mail();
+                    _result = _app_Log_Mail.getEmailLog(order.OrderId, releaseID - 1);
                     if (_result.Success == false)
                     {
                         errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
                         failedRecord++;
 
-                        Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+                        Common.Log("Order : " + order.OrderId + "  getEmailLog---ER \r\n" + _result.ErrMessage);
 
                         continue;
                     }
-                    EmailMessage email = _result.ObjectValue as EmailMessage;
+                    _app_Log_Mail = _result.Object as App_Log_Mail;
 
                     #endregion
 
-                    #region sent email
-
-                    _result = EmailFactory.SentEmail(order.OrderId, email);
-                    if (_result.Success == false)
+                    if (_app_Log_Mail.ID == 0)
                     {
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
+                        #region sent shipment email
 
-                        Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
+                        #region get email content
 
-                        continue;
+                        _result = EmailFactory.GetMailContent(order.OrderId, releaseID - 1, _tProgram_Email);
+                        if (_result.Success == false)
+                        {
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+
+                            Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+
+                            continue;
+                        }
+                        EmailMessage email = _result.ObjectValue as EmailMessage;
+
+                        #endregion
+
+                        #region sent email
+
+                        _result = EmailFactory.SentEmail(order.OrderId, releaseID - 1, email);
+                        if (_result.Success == false)
+                        {
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+
+                            Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
+
+                            continue;
+                        }
+                        #endregion
+
+                        #endregion
                     }
-                    #endregion
-
-                    #endregion
                 }
 
                 successfulRecord++;

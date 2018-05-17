@@ -33,6 +33,7 @@ namespace VCBusiness.Model
         private string _replyToLabel;
         private string _respondLabel;
         private int _orderTypeId;
+       
 
 
         [BindingField("ProgramEmailId", true)]
@@ -227,7 +228,7 @@ namespace VCBusiness.Model
                 return _orderTypeId;
             }
         }
-
+      
         #endregion
 
         #region Extend Property

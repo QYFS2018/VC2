@@ -37,6 +37,7 @@ namespace WComm
 		private int? _programId;
 		private bool? _isTest;
 		private string _type;
+        private int _releaseID;
 
 		/// <summary>
 		///		mail log identify.
@@ -233,13 +234,29 @@ namespace WComm
                 return _type;
 			}
 		}
-
+        [BindingField("ReleaseID", true)]
+        public int ReleaseID
+        {
+            set
+            {
+                _releaseID = value;
+            }
+            get
+            {
+                return _releaseID;
+            }
+        }
 		#endregion 
 
 		#region Extend Property
 
 		#endregion 
 
-	
+        public ReturnValue getEmailLog(int orderId,int releaseID)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getEmailLog"), orderId, releaseID);
+            ReturnValue _result = this.getEntity(Usp_SQL);
+            return _result;
+        }
 	}
 }

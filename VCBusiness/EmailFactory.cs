@@ -186,7 +186,7 @@ namespace VCBusiness
             return _result;
         }
 
-        public ReturnValue SentEmail(int orderId, EmailMessage email)
+        public ReturnValue SentEmail(int orderId,int releaseID, EmailMessage email)
         {
             ReturnValue _result = new ReturnValue();
 
@@ -241,6 +241,7 @@ namespace VCBusiness
                 _app_Log_Mail.Content = email.HtmlPart.Contents;
             }
             _app_Log_Mail.OId = orderId.ToString();
+            _app_Log_Mail.ReleaseID = releaseID;
             _app_Log_Mail.Success = true; ;
             _app_Log_Mail.Notes = "";
             _app_Log_Mail.Type = "ShippingConfirm";

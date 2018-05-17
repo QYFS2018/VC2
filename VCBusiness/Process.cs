@@ -64,7 +64,7 @@ namespace VCBusiness
                 }
                 EmailMessage email = _result.ObjectValue as EmailMessage;
 
-                _result = EmailFactory.SentEmail(int.Parse(oid), email);
+                _result = EmailFactory.SentEmail(int.Parse(oid),1, email);
                 if (_result.Success == false)
                 {
                     return _result;
