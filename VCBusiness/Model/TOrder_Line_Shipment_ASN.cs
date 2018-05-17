@@ -193,7 +193,12 @@ namespace VCBusiness.Model
 
           #endregion 
           
-          
+          public ReturnValue deleteOrderLineShipmentASNByOrderID(int orderId, Transaction tran)
+          {
+              string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("deleteOrderLineShipmentASNByOrderID"), orderId);
+              ReturnValue _result = this.ExecSql(Usp_SQL, tran);
+              return _result;
+          }
       
      }
 }

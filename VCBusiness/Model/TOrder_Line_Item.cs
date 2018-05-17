@@ -507,25 +507,39 @@ namespace VCBusiness.Model
         }
 
 
-        public ReturnValue updateOrderLineItemShipment(int id,DateTime shipDate,string tracking,Transaction tran)
+        public ReturnValue updateOrderLineItemShipment(int id,string sku,DateTime shipDate,string tracking,Transaction tran)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderLineItemShipment"), id, shipDate,tracking);
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderLineItemShipment"), id,sku, shipDate,tracking);
             ReturnValue _result = this.ExecSql(Usp_SQL, tran);
             return _result;
         }
 
-        public ReturnValue createASN(int id, Transaction tran)
+        public ReturnValue createASN(int orderId, int releaseID, Transaction tran)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("createASN"), id);
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("createASN"), orderId,releaseID);
             ReturnValue _result = this.ExecSql(Usp_SQL, tran);
             return _result;
         }
 
 
-        public ReturnValue getOrderDetailsByOrderId(int id)
+        public ReturnValue getOrderDetailsByOrderId(int id, int releaseID)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderDetailsByOrderId"), id);
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderDetailsByOrderId"), id, releaseID);
             ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
+
+        public ReturnValue getOrderReleaseByOrderId(int id, Transaction tran)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderReleaseByOrderId"), id);
+            ReturnValue _result = this.getEntityList(Usp_SQL, tran);
+            return _result;
+        }
+
+        public ReturnValue updateOrderReleaseByTracking(int orderId,string tracking, int releaseID, Transaction tran)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderReleaseByTracking"), orderId, tracking, releaseID);
+            ReturnValue _result = this.ExecSql (Usp_SQL, tran);
             return _result;
         }
     }

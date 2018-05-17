@@ -12,7 +12,7 @@ namespace VCBusiness
 {
     public class EmailFactory
     {
-        public ReturnValue GetMailContent(int orderId, TProgram_Email mi)
+        public ReturnValue GetMailContent(int orderId,int releaseID, TProgram_Email mi)
         {
             ReturnValue _result = new ReturnValue();
 
@@ -42,7 +42,7 @@ namespace VCBusiness
 
 
             TOrder_Line_Item _tOrder_Line_Item = new TOrder_Line_Item();
-            _result = _tOrder_Line_Item.getOrderDetailsByOrderId(orderId);
+            _result = _tOrder_Line_Item.getOrderDetailsByOrderId(orderId, releaseID);
             if (_result.Success == false)
             {
                 return _result;

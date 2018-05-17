@@ -170,49 +170,31 @@ namespace VCBusiness
 
                     continue;
                 }
-                TOrder_Line_Item shippingInfo = _result.Object as TOrder_Line_Item;
+
+                EntityList productList = _result.ObjectList;
+
+                if (productList.Count() == 0)
+                {
+                    Common.Log("Order : " + order.OrderId + "---Unshipped");
+
+                    continue;
+                }
 
                 #endregion
 
-                if (shippingInfo.ShippedDate != null)
+                Transaction _tran = new Transaction();
+
+                #region update order line 
+
+                string ShipCarrier="";
+                string ShipMethod="";
+
+                foreach (TOrder_Line_Item item in productList)
                 {
-                    #region update back to ZStore
+                    ShipCarrier = item.ShipCarrier;
+                    ShipMethod = item.ShipMethod;
 
-                    Transaction _tran = new Transaction();
-
-                    TOrder_Line_Shipment_Carton _tOrder_Line_Shipment_Carton = new TOrder_Line_Shipment_Carton();
-                    _tOrder_Line_Shipment_Carton.ORDER_ID = order.OrderId;
-                    _tOrder_Line_Shipment_Carton.RELEASE_NUM = 1;
-                    _tOrder_Line_Shipment_Carton.CARTON_ID_FROM = "1";
-                    _tOrder_Line_Shipment_Carton.CARRIER_ID = shippingInfo.ShipCarrier;
-                    _tOrder_Line_Shipment_Carton.SHIP_METHOD = shippingInfo.ShipMethod;
-                    _tOrder_Line_Shipment_Carton.PACKAGE_TRACE_ID = shippingInfo.TrackingNumber;
-                    _tOrder_Line_Shipment_Carton.Ship_date = shippingInfo.ShippedDate.Value;
-
-                    _result = _tOrder_Line_Shipment_Carton.Save(_tran);
-                    if (_result.Success == false)
-                    {
-                        _tran.RollbackTransaction();
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
-
-                        Common.Log("Order : " + order.OrderId + "  _tOrder_Line_Shipment_Carton---ER \r\n" + _result.ErrMessage);
-
-                        continue;
-                    }
-                    _result = shippingInfo.createASN(order.OrderId, _tran);
-                    if (_result.Success == false)
-                    {
-                        _tran.RollbackTransaction();
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
-
-                        Common.Log("Order : " + order.OrderId + "  createASN---ER \r\n" + _result.ErrMessage);
-
-                        continue;
-                    }
-
-                    _result = shippingInfo.updateOrderLineItemShipment(order.OrderId, shippingInfo.ShippedDate.Value, shippingInfo.TrackingNumber, _tran);
+                    _result = item.updateOrderLineItemShipment(order.OrderId, item.PartNumber, item.ShippedDate.Value, item.TrackingNumber, _tran);
                     if (_result.Success == false)
                     {
                         _tran.RollbackTransaction();
@@ -223,58 +205,161 @@ namespace VCBusiness
 
                         continue;
                     }
+                }
 
-                    _tran.CommitTransaction();
+                #endregion
 
-                    #endregion
+                #region update release 
 
-                    if (Common.ShipConfirmEmail == true)
+                #region get release list
+
+                TOrder_Line_Item _tOrder_Line_Item = new TOrder_Line_Item();
+                _result = _tOrder_Line_Item.getOrderReleaseByOrderId(order.OrderId, _tran);
+                if (_result.Success == false)
+                {
+                    _tran.RollbackTransaction();
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  getOrderReleaseByOrderId---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+                EntityList _releaseList = _result.ObjectList;
+
+                #endregion
+
+                #region delete cartion and ASN
+
+                TOrder_Line_Shipment_Carton _tOrder_Line_Shipment_Carton = new TOrder_Line_Shipment_Carton();
+                _result = _tOrder_Line_Shipment_Carton.deleteOrderLineShipmentCartonByOrderID(order.OrderId, _tran);
+                if (_result.Success == false)
+                {
+                    _tran.RollbackTransaction();
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  deleteOrderLineShipmentCartonByOrderID---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+
+                TOrder_Line_Shipment_ASN _tOrder_Line_Shipment_ASN = new TOrder_Line_Shipment_ASN();
+                _result = _tOrder_Line_Shipment_ASN.deleteOrderLineShipmentASNByOrderID(order.OrderId, _tran);
+                if (_result.Success == false)
+                {
+                    _tran.RollbackTransaction();
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  deleteOrderLineShipmentASNByOrderID---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+                #endregion
+
+                int releaseID = 1;
+                foreach (TOrder_Line_Item item in _releaseList)
+                {
+                    #region update release 
+
+                    _result = item.updateOrderReleaseByTracking(order.OrderId,item.TrackingNumber,releaseID, _tran);
+                    if (_result.Success == false)
                     {
-                        #region sent shipment email
+                        _tran.RollbackTransaction();
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
 
-                        #region get email content
+                        Common.Log("Order : " + order.OrderId + "  updateOrderReleaseByTracking---ER \r\n" + _result.ErrMessage);
 
-                        _result = EmailFactory.GetMailContent(order.OrderId, _tProgram_Email);
-                        if (_result.Success == false)
-                        {
-                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                            failedRecord++;
+                        continue;
+                    }
 
-                            Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+                    _tOrder_Line_Shipment_Carton = new TOrder_Line_Shipment_Carton();
+                    _tOrder_Line_Shipment_Carton.ORDER_ID = order.OrderId;
+                    _tOrder_Line_Shipment_Carton.RELEASE_NUM = releaseID;
+                    _tOrder_Line_Shipment_Carton.CARTON_ID_FROM = releaseID.ToString();
+                    _tOrder_Line_Shipment_Carton.CARRIER_ID = ShipCarrier;
+                    _tOrder_Line_Shipment_Carton.SHIP_METHOD = ShipMethod;
+                    _tOrder_Line_Shipment_Carton.PACKAGE_TRACE_ID = item.TrackingNumber;
+                    _tOrder_Line_Shipment_Carton.Ship_date = item.ShippedDate.Value;
 
-                            continue;
-                        }
-                        EmailMessage email = _result.ObjectValue as EmailMessage;
+                    _result = _tOrder_Line_Shipment_Carton.Save(_tran);
+                    if (_result.Success == false)
+                    {
+                        _tran.RollbackTransaction();
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
 
-                        #endregion
+                        Common.Log("Order : " + order.OrderId + "  _tOrder_Line_Shipment_Carton.Save---ER \r\n" + _result.ErrMessage);
 
-                        #region sent email
-
-                        _result = EmailFactory.SentEmail(order.OrderId, email);
-                        if (_result.Success == false)
-                        {
-                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                            failedRecord++;
-
-                            Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
-
-                            continue;
-                        }
-                        #endregion
-
-                        #endregion
+                        continue;
                     }
 
 
-                    successfulRecord++;
-                    Common.Log("Order : " + order.OrderId + "---OK");
-                }
-                else
-                {
-                    Common.Log("Order : " + order.OrderId + "---Unshipped");
+                    _result = item.createASN(order.OrderId,releaseID, _tran);
+                    if (_result.Success == false)
+                    {
+                        _tran.RollbackTransaction();
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
+
+                        Common.Log("Order : " + order.OrderId + " createASN---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+
+                    #endregion
+
+                    releaseID++;
                 }
 
-               
+                #endregion
+
+                _tran.CommitTransaction();
+
+                if (Common.ShipConfirmEmail == true)
+                {
+                    #region sent shipment email
+
+                    #region get email content
+
+                    _result = EmailFactory.GetMailContent(order.OrderId,releaseID-1, _tProgram_Email);
+                    if (_result.Success == false)
+                    {
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
+
+                        Common.Log("Order : " + order.OrderId + "  GetMailContent---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+                    EmailMessage email = _result.ObjectValue as EmailMessage;
+
+                    #endregion
+
+                    #region sent email
+
+                    _result = EmailFactory.SentEmail(order.OrderId, email);
+                    if (_result.Success == false)
+                    {
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
+
+                        Common.Log("Order : " + order.OrderId + "  SentEmail---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+                    #endregion
+
+                    #endregion
+                }
+
+                successfulRecord++;
+                Common.Log("Order : " + order.OrderId + "---OK");
             }
 
             #endregion

@@ -25,12 +25,12 @@ namespace VCTransfer
 
 
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore();
-            //_result = VeraCore.GetOrderShipmentInfo("28040617");
+            //_result = VeraCore.GetOrderShipmentInfo("28041792");
 
-            string sourceKey = Encrypt.EncryptData("junjun", "2018-5-15");
+            string sourceKey = Encrypt.EncryptData("junjun", "2018-6-20");
 
 
-            sourceKey = Encrypt.DecryptData("junjun", "oWS2Dpkw7LXDByVYTyUIAw==");
+            //sourceKey = Encrypt.DecryptData("junjun", "oWS2Dpkw7LXDByVYTyUIAw==");
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore();
             //_result = VeraCore.GetInventory("00999","00999-3");
             //_result = VeraCore.PostProduct("00999", "00999-31","aaaa009");

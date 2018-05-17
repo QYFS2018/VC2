@@ -175,6 +175,13 @@ namespace VCBusiness
 
                 _tOrder_Line_Item.ShipCarrier = orderInqRecord.OrdHead.Carrier;
                 _tOrder_Line_Item.ShipMethod = orderInqRecord.OrdHead.Service;
+                _tOrder_Line_Item.ShipToAddress = orderInqRecord.ShipToInfo.Address1;
+                _tOrder_Line_Item.ShipToCity = orderInqRecord.ShipToInfo.City;
+                _tOrder_Line_Item.ShipToState = orderInqRecord.ShipToInfo.State;
+                _tOrder_Line_Item.ShipToZip = orderInqRecord.ShipToInfo.PostalCode;
+
+                EntityList lineList = new EntityList();
+
 
                 foreach (PickPackType itemPackage in orderInqRecord.ShippingOrders)
                 {
@@ -189,9 +196,22 @@ namespace VCBusiness
                             break;
                         }
                     }
+
+                    if (_tOrder_Line_Item.ShippedDate != null)
+                    {
+                        foreach (PickPackProductType product in itemPackage.PickPackProducts)
+                        {
+                            TOrder_Line_Item productItem = _tOrder_Line_Item.Clone() as TOrder_Line_Item;
+
+                            productItem.PartNumber = product.ProductId;
+                            productItem.ProductName = product.ProductDesc;
+                            productItem.Quantity = product.ToShipQty;
+                            lineList.Add(productItem);
+                        }
+                    }
                 }
 
-                _result.Object = _tOrder_Line_Item;
+                _result.ObjectList = lineList;
             }
             catch (Exception ex)
             {

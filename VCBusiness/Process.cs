@@ -57,7 +57,7 @@ namespace VCBusiness
                 _tProgram_Email = _result.Object as TProgram_Email;
 
                 EmailFactory EmailFactory = new VCBusiness.EmailFactory();
-                _result = EmailFactory.GetMailContent(int.Parse(oid), _tProgram_Email);
+                _result = EmailFactory.GetMailContent(int.Parse(oid),1, _tProgram_Email);
                 if (_result.Success == false)
                 {
                     return _result;
