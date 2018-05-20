@@ -10,19 +10,13 @@ using DotNetOpenMail;
 
 namespace VCBusiness
 {
-    public class Order
+    public class Order : BaseOrder
     {
-        int successfulRecord = 0;
-        int failedRecord = 0;
-        string errorNotes = "";
-
-        public ReturnValue OrderDownload()
+        public override ReturnValue Download()
         {
             ReturnValue _result = new ReturnValue();
 
             Common.Connect();
-
-            VCBusiness.VeraCore VeraCore = new VeraCore();
 
             #region get order list
 
@@ -106,13 +100,11 @@ namespace VCBusiness
             return _result;
         }
 
-        public ReturnValue ShipmentUpdate()
+        public override ReturnValue UpdateShipment()
         {
             ReturnValue _result = new ReturnValue();
 
             Common.Connect();
-
-            VCBusiness.VeraCore VeraCore = new VeraCore();
 
             #region get order list
 
@@ -321,7 +313,7 @@ namespace VCBusiness
 
                 _tran.CommitTransaction();
 
-                if (Common.ShipConfirmEmail == true)
+                if (Owner.OwnerInfo["ShipConfirmation"].ToString() == "Y")
                 {
                     #region check already sent email
 
@@ -407,7 +399,5 @@ namespace VCBusiness
 
             return _result;
         }
-
-
     }
 }

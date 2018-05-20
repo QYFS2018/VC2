@@ -25,9 +25,9 @@ namespace VCTransfer
 
 
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore();
-            //_result = VeraCore.GetOrderShipmentInfo("28041792");
+            //_result = VeraCore.PostProduct("SNKGRD", "Test001", "Test001");
 
-            string sourceKey = Encrypt.EncryptData("junjun", "2018-6-20");
+            //string sourceKey = Encrypt.EncryptData("junjun", "2018-6-20");
 
 
             //sourceKey = Encrypt.DecryptData("junjun", "oWS2Dpkw7LXDByVYTyUIAw==");
@@ -55,10 +55,11 @@ namespace VCTransfer
                     return;
                 }
 
-                string _action = args[0].ToString().Trim();
+                string ownerCode = args[0].ToString().Trim();
+                string action = args[1].ToString().Trim();
 
                 VCBusiness.Process Process = new VCBusiness.Process();
-                _result = Process.Run(_action,"");
+                _result = Process.Run(ownerCode,action, "");
 
             }
 

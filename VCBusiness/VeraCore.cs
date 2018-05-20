@@ -23,14 +23,14 @@ namespace VCBusiness
         string requestXml;
         string responseXml;
 
-        public VeraCore()
+        public VeraCore(string user, string password)
         {
             OMSSoapClient = new VeraCoreOMS.OMSSoapClient();
             AuthenticationHeader = new VeraCoreOMS.AuthenticationHeader();
             DebugHeader = new VeraCoreOMS.DebugHeader();
 
-            AuthenticationHeader.Username = VCBusiness.Common.VeraCoreUserName;
-            AuthenticationHeader.Password = VCBusiness.Common.VeraCorePassword;
+            AuthenticationHeader.Username = user;
+            AuthenticationHeader.Password = password;
 
 
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;

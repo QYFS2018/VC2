@@ -5,37 +5,17 @@ using System.Text;
 using System.IO;
 using WComm;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace VCBusiness
 {
     public class Common
     {
-        public static string VeraCoreUserName
-        {
-            get
-            {
-                return System.Configuration.ConfigurationSettings.AppSettings["VeraCoreUserName"].ToString();
-            }
-        }
 
-        public static string VeraCorePassword
-        {
-            get
-            {
-                return System.Configuration.ConfigurationSettings.AppSettings["VeraCorePassword"].ToString();
-            }
-        }
-
-        public static string OwnerCode
-        {
-            get
-            {
-                return System.Configuration.ConfigurationSettings.AppSettings["OwnerCode"].ToString();
-            }
-        }
+        public static string OwnerCode;
 
         public static string ProcessType;
-
+        
         public static void Connect()
         {
 
@@ -61,7 +41,7 @@ namespace VCBusiness
         public static void Log(string message)
         {
 
-            string path = "Log/"+ Common.ProcessType + "_" +
+            string path = "Log/"+ Common.OwnerCode.ToString() + "/" + Common.ProcessType + "_" +
                 System.DateTime.Now.ToString("yyyyMMdd") + ".log";
 
             string _message = "";
@@ -101,7 +81,7 @@ namespace VCBusiness
 
             ReturnValue _result = new ReturnValue();
 
-            string path = Application.StartupPath + "/PostLog/" + System.DateTime.Now.ToString("yyyyMMdd") + "_" + type + ".log";
+            string path = Application.StartupPath + "/PostLog/" + Common.OwnerCode.ToString() + "/" +System.DateTime.Now.ToString("yyyyMMdd") + "_" + type + ".log";
 
             StringBuilder sb = new StringBuilder();
             sb.Append(System.DateTime.Now.ToString()  + "\r\n");
@@ -184,6 +164,19 @@ namespace VCBusiness
                 return;
             }
 
+            Controler Controler = new Controler();
+            Controler.getControler();
+            Owner _owner = null;
+            foreach (Owner _item in Controler.Owners)
+            {
+                if (_item.OwnerCode ==Common.OwnerCode)
+                {
+                    _owner = _item;
+                    break;
+                }
+            }
+
+
 
             WComm.MyEmail _mail = new MyEmail();
 
@@ -214,12 +207,12 @@ namespace VCBusiness
             }
 
 
-            _mail.Subject = "Failure : [FIBI] -- " + Common.ProcessType;
+            _mail.Subject = "Failure : [" + _owner.Name + "]  -- " + Common.ProcessType;
 
 
             if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
             {
-                _mail.Subject = "[TEST] " + _mail.Subject;
+                _mail.Subject = "[Test] " + _mail.Subject;
             }
 
             string _notes = "";
@@ -298,13 +291,37 @@ namespace VCBusiness
             }
         }
 
-        public static bool ShipConfirmEmail
+        public static object CreateObject(Owner onwer, string classCode)
         {
-            get
+            object _obj = null;
+
+            ClassType _classType = onwer.ClassType[classCode] as ClassType;
+
+            Assembly a;
+            Type _t;
+
+
+            if (String.IsNullOrEmpty(_classType.AssemblyFile) == true)
             {
-                return bool.Parse(System.Configuration.ConfigurationSettings.AppSettings["ShipConfirmEmail"].ToString());
+                a = Assembly.GetCallingAssembly();
+                _t = a.GetType(_classType.Type);
             }
+            else
+            {
+                a = Assembly.LoadFrom(_classType.AssemblyFile);
+                _t = a.GetType(_classType.Type);
+            }
+
+
+            _obj = Activator.CreateInstance(_t);
+
+            return _obj;
+
+
         }
 
     }
+
+
+
 }

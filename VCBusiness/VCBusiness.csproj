@@ -16,7 +16,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTransfer.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Controler.cs" />
     <Compile Include="EmailFactory.cs" />
     <Compile Include="Model\TOrder.cs" />
     <Compile Include="Model\TOrder_Line_Item.cs" />

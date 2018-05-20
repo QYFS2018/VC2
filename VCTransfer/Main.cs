@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using WComm;
 using VCBusiness;
 
+
 namespace VCTransfer
 {
     public partial class Main : Form
@@ -16,6 +17,20 @@ namespace VCTransfer
         public Main()
         {
             InitializeComponent();
+
+            ReturnValue _result = new ReturnValue();
+
+            Controler Controler = new Controler();
+            _result = Controler.getControler();
+
+            Controler.Owners.Sort(Controler.OwnerComparison);
+
+            foreach (Owner _item in Controler.Owners)
+            {
+                this.cb_Owner.Items.Add(_item.OwnerCode.ToString() + "-" + _item.Name);
+            }
+
+            this.cb_Owner.SelectedIndex = 0;
         }
 
         private void OrderDownload_Click(object sender, EventArgs e)
@@ -62,9 +77,13 @@ namespace VCTransfer
      
             ReturnValue _result = new ReturnValue();
 
+            string[] _cbValue = this.cb_Owner.SelectedItem.ToString().Split('-');
+
+            string _ownerCode = _cbValue[0].ToString();
+
             VCBusiness.Process Process = new VCBusiness.Process();
 
-            _result = Process.Run(action,OID.Text .Trim ());
+            _result = Process.Run(_ownerCode, action, OID.Text.Trim());
             if (_result.Success == false)
             {
                 MessageBox.Show(_result.ErrMessage);

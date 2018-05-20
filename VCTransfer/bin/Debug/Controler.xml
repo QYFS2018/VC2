@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Owners>
+	<Owner Name="FIBI"  OwnerCode="FIBICL" RegSubKey="FIBI" Enable="true" >
+		<OwnerInfo>
+			<Info Key="VeraCoreUserName">FIBI_ORD</Info>
+			<Info Key="VeraCorePassword">HfFR9n!n</Info>
+			<Info Key="ShipConfirmation">Y</Info>
+			<Info Key="ProductClass">HARD GOODS</Info>
+			<Info Key="LogSuccessAction">Y</Info>
+			<Info Key="PhontomStatus">LINE</Info>
+			<Info Key="ImportDM">N</Info>
+			<Info Key="InternationalOrderVerification">N</Info>
+			<Info Key="ExpectedShipDate">N</Info>
+      <Info Key="ProgramID">433</Info>
+      <Info Key="OrderType">REG</Info>
+		</OwnerInfo>
+		<Actions>
+			<Action Code="OrderDownload" Enable="true"/>
+			<Action Code="UpdateShipment" Enable="true"/>
+			<Action Code="UpdateInventoryStatus" Enable="true"/>
+		</Actions>
+		<ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+		</ClassType>
+	</Owner>
+  <Owner Name="Tecnifibre"  OwnerCode="00077" RegSubKey="FIBI" Enable="true" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">FIBI_ORD</Info>
+      <Info Key="VeraCorePassword">HfFR9n!n</Info>
+      <Info Key="ShipConfirmation">Y</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="PhontomStatus">LINE</Info>
+      <Info Key="ImportDM">N</Info>
+      <Info Key="InternationalOrderVerification">N</Info>
+      <Info Key="ExpectedShipDate">N</Info>
+      <Info Key="ProgramID">441</Info>
+      <Info Key="OrderType">REG</Info>
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+    </Actions>
+    <ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+    </ClassType>
+  </Owner>
+</Owners>

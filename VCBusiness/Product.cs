@@ -7,13 +7,10 @@ using WComm;
 
 namespace VCBusiness
 {
-    public class Product
+    public class Product : BaseProduct
     {
-        int successfulRecord = 0;
-        int failedRecord = 0;
-        string errorNotes = "";
 
-        public ReturnValue ProductDownload()
+        public override ReturnValue ProductDownload()
         {
             ReturnValue _result = new ReturnValue();
 
@@ -36,8 +33,6 @@ namespace VCBusiness
             #endregion
 
             #region get inventory
-
-            VCBusiness.VeraCore VeraCore = new VeraCore();
 
             foreach (TProduct item in productList)
             {
@@ -72,7 +67,7 @@ namespace VCBusiness
             return _result;
         }
 
-        public ReturnValue UpdateInventoryStatus()
+        public override ReturnValue UpdateInventoryStatus()
         {
             ReturnValue _result = new ReturnValue();
 
@@ -97,9 +92,7 @@ namespace VCBusiness
             #endregion
 
             #region get inventory 
-
-            VCBusiness.VeraCore VeraCore = new VeraCore();
-
+            
             foreach (TProduct item in productList)
             {
                _result= VeraCore.GetInventory(VCBusiness.Common.OwnerCode, item.PartNumber);
