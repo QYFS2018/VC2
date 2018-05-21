@@ -36,7 +36,7 @@
       <Info Key="PhontomStatus">LINE</Info>
       <Info Key="ImportDM">N</Info>
       <Info Key="InternationalOrderVerification">N</Info>
-      <Info Key="ExpectedShipDate">N</Info>
+      <Info Key="ExpectedShipDate">Y</Info>
       <Info Key="ProgramID">441</Info>
       <Info Key="OrderType">REG</Info>
     </OwnerInfo>
@@ -46,7 +46,7 @@
       <Action Code="UpdateInventoryStatus" Enable="true"/>
     </Actions>
     <ClassType>
-      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Order" ClassType="VCBusiness.TecnifibreOrder" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderTF" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
     </ClassType>

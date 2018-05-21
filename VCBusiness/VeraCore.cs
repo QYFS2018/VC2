@@ -301,7 +301,15 @@ namespace VCBusiness
             OrderShipTo.Phone = orderItem.S_PHONE;
             OrderShipTo.PostalCode = orderItem.S_ZIP;
             OrderShipTo.State = orderItem.S_STATE;
+            if (order.ExpectedShipDate != null)
+            {
+                OrderShipTo.NeededBy = order.ExpectedShipDate.ToString();
+            }
 
+            if (string.IsNullOrWhiteSpace(order.ShippingAccountNumber)==false )
+            {
+                OrderShipTo.ThirdPartyAccountNumber = order.ShippingAccountNumber;
+            }
 
             OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
             OrderShipTo.FreightCarrier.Name = orderItem.ShipCarrier;

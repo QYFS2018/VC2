@@ -40,7 +40,7 @@ namespace VCBusiness
 
             foreach (TOrder order in orderList)
             {
-                #region post order to VeraCore
+                #region get order line
 
                 TOrder_Line_Item _tOrder_Line_Item = new TOrder_Line_Item();
                 _result = _tOrder_Line_Item.getOrderLineByOrderId(order.OrderId);
@@ -56,11 +56,62 @@ namespace VCBusiness
 
                 EntityList orderItemList = _result.ObjectList;
 
+                if (orderItemList.Count() == 0)
+                {
+                    _result.ErrMessage = "Can't find Line Item";
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  getOrderLineByOrderId---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+
+                #endregion
+
+                #region fill data
+
+                order.ProgramID = int.Parse(Owner.OwnerInfo["ProgramID"].ToString());
 
                 if (Owner.OwnerInfo.ContainsKey("FreightService") == true)
                 {
-                    order.ShipMethod = Owner.OwnerInfo["FreightService"].ToString();
+                   ((TOrder_Line_Item) orderItemList[0] ).ShipMethod= Owner.OwnerInfo["FreightService"].ToString();
                 }
+
+                _result = this.customerData(order, orderItemList);
+                if (_result.Success == false)
+                {
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  customerData---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+                #endregion
+
+                #region ExpectedShipDate
+
+                if (this.Owner.OwnerInfo.ContainsKey("ExpectedShipDate") == true && this.Owner.OwnerInfo["ExpectedShipDate"].ToString() == "Y")
+                {
+                    _result = this.updateExpectedShipDate(order, orderItemList);
+                    if (_result.Success == false)
+                    {
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
+
+                        Common.Log("Order : " + order.OrderId + "  updateExpectedShipDate---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+
+                }
+
+                #endregion
+
+                #region post order to VeraCore
 
                 _result = VeraCore.PostOrder(order, orderItemList);
                 if (_result.Success == false)
@@ -78,6 +129,9 @@ namespace VCBusiness
                     continue;
                 }
 
+                 #endregion
+
+                #region release  order line
 
                 _result = _tOrder_Line_Item.ReleaseOrderLineByOrderId(order.OrderId);
                 if (_result.Success == false)
@@ -102,6 +156,58 @@ namespace VCBusiness
             Common.SentAlterEmail(failedRecord, errorNotes);
 
             _result.Success = true;
+
+            return _result;
+        }
+
+        protected virtual ReturnValue updateExpectedShipDate(TOrder order, EntityList orderline)
+        {
+            ReturnValue _result = new ReturnValue();
+
+            if (orderline.Count == 0)
+            {
+                return _result;
+            }
+
+
+            Model.TOrder_Line_Item _line0 = orderline[0] as Model.TOrder_Line_Item;
+
+            #region calcuate ExpectedShipDate
+     
+            TOrder _tOrderExpectedShipDate = new TOrder();
+            _tOrderExpectedShipDate.DataConnectProviders = "ZoytoCommon";
+            _result = _tOrderExpectedShipDate.getOrderExpectedShipDate(order.ProgramID, System.DateTime.Now, _line0.ShipMethod);
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+            _tOrderExpectedShipDate = _result.Object as TOrder;
+
+            if (_tOrderExpectedShipDate.ExpectedShipDate==null || _tOrderExpectedShipDate.ExpectedShipDate.Value.Year == 1)
+            {
+                _result.Success = false;
+                _result.ErrMessage = "expected ship date is invalid :" + _tOrderExpectedShipDate.ExpectedShipDate.ToString();
+                return _result;
+            }
+            else
+            {
+                order.ExpectedShipDate = _tOrderExpectedShipDate.ExpectedShipDate;
+                _result = order.updateOrderExpectedShipDate(order.OrderId, _tOrderExpectedShipDate.ExpectedShipDate.Value);
+                if (_result.Success == false)
+                {
+                    return _result;
+                }
+            }
+
+            #endregion
+
+
+            return _result;
+        }
+
+        protected virtual ReturnValue customerData(TOrder order, EntityList orderline)
+        {
+            ReturnValue _result = new ReturnValue();
 
             return _result;
         }

@@ -569,6 +569,7 @@ namespace VCBusiness.Model
         private string _trackingNumber;
         private string _email;
         private string _orderType;
+        private int _programID;
 
         [BindingField("SHName", true)]
         public string ShipMethod
@@ -630,7 +631,18 @@ namespace VCBusiness.Model
                 return _orderType;
             }
         }
-
+        [BindingField("ProgramID", true)]
+        public int ProgramID
+        {
+            set
+            {
+                _programID = value;
+            }
+            get
+            {
+                return _programID;
+            }
+        }
 
         private string _shipToCountry;
         [BindingField("ShipToCountry", true)]
@@ -774,6 +786,49 @@ namespace VCBusiness.Model
             }
         }
 
+
+        private DateTime? _expectedShipDate;
+        [BindingField("ExpectedShipDate", true)]
+        public DateTime? ExpectedShipDate
+        {
+            set
+            {
+                _expectedShipDate = value;
+            }
+            get
+            {
+                return _expectedShipDate;
+            }
+        }
+
+        private string _shippingAccountNumber;
+        [BindingField("ShippingAccountNumber", true)]
+        public string ShippingAccountNumber
+        {
+            set
+            {
+                _shippingAccountNumber = value;
+            }
+            get
+            {
+                return _shippingAccountNumber;
+            }
+        }
+
+        private bool _usingAccountNumber;
+        [BindingField("UsingAccountNumber", true)]
+        public bool UsingAccountNumber
+        {
+            set
+            {
+                _usingAccountNumber = value;
+            }
+            get
+            {
+                return _usingAccountNumber;
+            }
+        }
+
         #endregion 
 
         public virtual ReturnValue getOrderById(int id)
@@ -805,5 +860,20 @@ namespace VCBusiness.Model
             ReturnValue _result = this.ExecSql (Usp_SQL);
             return _result;
         }
+
+        public virtual ReturnValue getOrderExpectedShipDate(int programId, DateTime expectedShipDate, string shipmehtod)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderExpectedShipDate"), programId, expectedShipDate, shipmehtod);
+            ReturnValue _result = this.getEntity(Usp_SQL);
+            return _result;
+        }
+
+        public virtual ReturnValue updateOrderExpectedShipDate(int orderId, DateTime expectedShipDate)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderExpectedShipDate"), orderId, expectedShipDate);
+            ReturnValue _result = this.ExecSql(Usp_SQL);
+            return _result;
+        }
+
     }
 }

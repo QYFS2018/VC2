@@ -8,6 +8,7 @@ namespace VCBusiness.Model
     [BindingClass("Order")]
     public class TOrderTF : TOrder
     {
+
         public TOrderTF()
         {
 
@@ -17,6 +18,13 @@ namespace VCBusiness.Model
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getDownloadOrderListTF"));
             ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
+
+        public override ReturnValue getOrderById(int id)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderTFById"), id);
+            ReturnValue _result = this.getEntity(Usp_SQL);
             return _result;
         }
     }
