@@ -783,14 +783,14 @@ namespace VCBusiness.Model
             return _result;
         }
 
-        public ReturnValue getDownloadOrderList()
+        public virtual ReturnValue getDownloadOrderList()
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getDownloadOrderList"));
             ReturnValue _result = this.getEntityList(Usp_SQL);
             return _result;
         }
 
-        public ReturnValue getShimentOrderList()
+        public virtual ReturnValue getShimentOrderList()
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getShimentOrderList"));
             ReturnValue _result = this.getEntityList(Usp_SQL);
@@ -799,7 +799,7 @@ namespace VCBusiness.Model
 
 
 
-        public ReturnValue updateOrderStatusSH()
+        public virtual ReturnValue updateOrderStatusSH()
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderStatusSH"));
             ReturnValue _result = this.ExecSql (Usp_SQL);

@@ -66,6 +66,7 @@
     <Compile Include="Model\TOrder_Line_Shipment_Carton.cs" />
     <Compile Include="Model\TProduct.cs" />
     <Compile Include="Model\TProgram_Email.cs" />
+    <Compile Include="Model\TOrderTF.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="Product.cs" />

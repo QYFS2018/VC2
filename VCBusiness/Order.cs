@@ -20,7 +20,7 @@ namespace VCBusiness
 
             #region get order list
 
-            TOrder _tOrder = new TOrder();
+            Model.TOrder _tOrder = Common.CreateObject(this.Owner, "TOrder") as Model.TOrder;
             _result = _tOrder.getDownloadOrderList();
             if (_result.Success == false)
             {
@@ -55,6 +55,12 @@ namespace VCBusiness
                 }
 
                 EntityList orderItemList = _result.ObjectList;
+
+
+                if (Owner.OwnerInfo.ContainsKey("FreightService") == true)
+                {
+                    order.ShipMethod = Owner.OwnerInfo["FreightService"].ToString();
+                }
 
                 _result = VeraCore.PostOrder(order, orderItemList);
                 if (_result.Success == false)

@@ -13,6 +13,7 @@
 			<Info Key="ExpectedShipDate">N</Info>
       <Info Key="ProgramID">433</Info>
       <Info Key="OrderType">REG</Info>
+      <Info Key="FreightService">Standard</Info>
 		</OwnerInfo>
 		<Actions>
 			<Action Code="OrderDownload" Enable="true"/>
@@ -21,10 +22,11 @@
 		</Actions>
 		<ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrder" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
 		</ClassType>
 	</Owner>
-  <Owner Name="Tecnifibre"  OwnerCode="00077" RegSubKey="FIBI" Enable="true" >
+  <Owner Name="Tecnifibre"  OwnerCode="00077" RegSubKey="Tecnifibre" Enable="true" >
     <OwnerInfo>
       <Info Key="VeraCoreUserName">FIBI_ORD</Info>
       <Info Key="VeraCorePassword">HfFR9n!n</Info>
@@ -45,6 +47,7 @@
     </Actions>
     <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderTF" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>

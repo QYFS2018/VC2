@@ -315,8 +315,6 @@ namespace VCBusiness
                 OrderShipTo.FreightCarrier.Name = "USPS";
             }
 
-            OrderShipTo.FreightService.Description = "Standard";
-
             OrderShipTo.Key = "0";
             OrderShipTo.Flag = VCBusiness.VeraCoreOMS.ShipToFlag.Other;
 
