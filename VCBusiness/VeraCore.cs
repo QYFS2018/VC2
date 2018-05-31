@@ -71,6 +71,10 @@ namespace VCBusiness
         {
             ReturnValue _result = new ReturnValue();
 
+            if (string.IsNullOrWhiteSpace(title) == true)
+            {
+                title = sku;
+            }
             VCBusiness.VeraCoreOMS.Product product = new VCBusiness.VeraCoreOMS.Product();
             product.Header = new VCBusiness.VeraCoreOMS.ProductHeader();
             product.Header.Owner = new VCBusiness.VeraCoreOMS.Owner();
