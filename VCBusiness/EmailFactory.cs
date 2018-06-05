@@ -12,7 +12,7 @@ namespace VCBusiness
 {
     public class EmailFactory
     {
-        public ReturnValue GetMailContent(int orderId,int releaseID, TProgram_Email mi)
+        public virtual ReturnValue GetMailContent(int orderId,int releaseID, TProgram_Email mi)
         {
             ReturnValue _result = new ReturnValue();
 
@@ -252,8 +252,197 @@ namespace VCBusiness
             return _result;
 
         }
+    }
 
-    
-    
+    public class TecnifibreEmailFactory : EmailFactory
+    {
+        public override ReturnValue GetMailContent(int orderId, int releaseID, TProgram_Email mi)
+        {
+            ReturnValue _result = new ReturnValue();
+
+
+
+            return _result;
+        }
+
+        public ReturnValue SentInvoiceEmail(int invoiceId)
+        {
+            ReturnValue _result = new ReturnValue();
+
+            string MailContent = "";
+
+            string _emailTo = "";
+
+            System.Globalization.NumberFormatInfo nfi = Utilities.CurrentNumberFormat;
+
+            Model.TProgram_Email _tProgram_Email = new TProgram_Email();
+
+            try
+            {
+                #region generate Email Content
+
+                TCustomer _tCustomer = new TCustomer();
+                _result = _tCustomer.getCustomerByInvoiceId(invoiceId);
+                if (_result.Success == false)
+                {
+                    return _result;
+                }
+                _tCustomer = _result.Object as TCustomer;
+
+
+                _result = _tProgram_Email.getEmailTemplate("ShipInvoices");
+                if (_result.Success == false)
+                {
+                    return _result;
+                }
+                _tProgram_Email = _result.Object as Model.TProgram_Email;
+
+                string _mailHtmlContent = System.Web.HttpUtility.HtmlDecode(System.Web.HttpUtility.HtmlDecode(_tProgram_Email.FullHtml));
+
+
+                MailContent = _mailHtmlContent.Replace("[CustomerName]", _tCustomer.FirstName);
+
+                EmailMessage _mail = new EmailMessage();
+
+                _mail.HtmlPart = new HtmlAttachment(MailContent);
+                _mail.FromAddress = new EmailAddress(_tProgram_Email.RespondTo);
+                _mail.Subject = _tProgram_Email.Subject;
+
+
+
+                #endregion
+
+                #region setup EmailMessage
+
+                if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
+                {
+                    string[] maillist = Common.TestMailTo.Split(';');
+                    foreach (string _item in maillist)
+                    {
+                        _mail.AddToAddress(new EmailAddress(_item));
+
+                    }
+
+                    _emailTo = Common.TestMailTo;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(_tCustomer.Email) == true)
+                    {
+                        _result.Success = false;
+                        _result.ErrMessage = "Email To Address is empty";
+                        return _result;
+                    }
+                    else
+                    {
+                        string[] bcclist = _tCustomer.Email.Split(';');
+                        foreach (string _item in bcclist)
+                        {
+                            if (string.IsNullOrEmpty(_item) == false)
+                            {
+                                _mail.AddToAddress(new EmailAddress(_item));
+                            }
+                        }
+                    }
+
+                    _emailTo = _tCustomer.Email;
+                }
+
+
+                if (string.IsNullOrEmpty(_tProgram_Email.BccAddress) == false)
+                {
+                    string[] bcclist = _tProgram_Email.BccAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        if (string.IsNullOrEmpty(_item) == false)
+                        {
+                            _mail.AddBccAddress(new EmailAddress(_item));
+                        }
+                    }
+                }
+                if (string.IsNullOrEmpty(_tProgram_Email.CCAddress) == false)
+                {
+                    string[] bcclist = _tProgram_Email.CCAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        if (string.IsNullOrEmpty(_item) == false)
+                        {
+                            _mail.AddCcAddress(new EmailAddress(_item));
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(_tCustomer.InvoiceEmail) == false)
+                {
+                    _mail.AddCcAddress(new EmailAddress(_tCustomer.InvoiceEmail));
+                }
+
+                if (string.IsNullOrEmpty(_tCustomer.SalesRepEmail) == false)
+                {
+                    _mail.AddBccAddress(new EmailAddress(_tCustomer.SalesRepEmail));
+                }
+
+
+                #endregion
+
+                #region attached pdf
+
+                string pdffilename = "";
+
+
+                TecnifibreInvoicePDF TecnifibreInvoicePDF = new TecnifibreInvoicePDF();
+                _result = TecnifibreInvoicePDF.PrintInvoice(invoiceId);
+                if (_result.Success == false)
+                {
+                    return _result;
+                }
+
+                pdffilename = "Invoice/TFInvoice_" + invoiceId.ToString() + ".pdf";
+
+
+
+
+                FileAttachment fileAttachment = new FileAttachment(new FileInfo(pdffilename));
+
+                fileAttachment.ContentType = "application/pdf";
+
+                _mail.AddMixedAttachment(fileAttachment);
+
+                #endregion
+
+              
+
+            }
+            catch (Exception ex)
+            {
+                _result.Success = false;
+                _result.ErrMessage = ex.ToString();
+            }
+
+
+            #region Log App_Log_Mail
+            App_Log_Mail _app_Log_Mail = new App_Log_Mail();
+            // _app_Log_Mail.ProgramId = this.Owner.DefaultProgram.ProgramId;
+            _app_Log_Mail.IsTest = Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString());
+            _app_Log_Mail.CreatedOn = System.DateTime.Now;
+            _app_Log_Mail.AddressFrom = _tProgram_Email.RespondTo;
+            _app_Log_Mail.AddressTo = _emailTo;
+            _app_Log_Mail.Subject = _tProgram_Email.Subject;
+            _app_Log_Mail.Content = MailContent;
+
+            _app_Log_Mail.OId = invoiceId.ToString();
+            _app_Log_Mail.Success = _result.Success;
+            _app_Log_Mail.Notes = _result.ErrMessage;
+            _app_Log_Mail.Type = "ShippingInvoice";
+            _app_Log_Mail.Save();
+
+            #endregion
+
+
+            return _result;
+        }
+
+
+
     }
 }

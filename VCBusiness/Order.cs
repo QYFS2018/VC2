@@ -12,6 +12,8 @@ namespace VCBusiness
 {
     public class Order : BaseOrder
     {
+        #region Download
+
         public override ReturnValue Download()
         {
             ReturnValue _result = new ReturnValue();
@@ -80,7 +82,7 @@ namespace VCBusiness
                    ((TOrder_Line_Item) orderItemList[0] ).ShipMethod= Owner.OwnerInfo["FreightService"].ToString();
                 }
 
-                _result = this.customerData(order, orderItemList);
+                _result = this.customerEventPreOrderDownload(order, orderItemList);
                 if (_result.Success == false)
                 {
                     errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
@@ -246,7 +248,7 @@ namespace VCBusiness
             return _result;
         }
 
-        protected virtual ReturnValue customerData(TOrder order, EntityList orderline)
+        protected virtual ReturnValue customerEventPreOrderDownload(TOrder order, EntityList orderline)
         {
             ReturnValue _result = new ReturnValue();
 
@@ -340,6 +342,9 @@ namespace VCBusiness
             return _result;
         }
 
+        #endregion
+
+        #region UpdateShipment
 
         public override ReturnValue UpdateShipment()
         {
@@ -377,11 +382,11 @@ namespace VCBusiness
 
             _tProgram_Email = _result.Object as TProgram_Email;
 
-            VCBusiness.EmailFactory EmailFactory = new VCBusiness.EmailFactory();
+            
 
             #endregion
 
-            #region post order to VerCore
+            #region update shipment
 
             foreach (TOrder order in orderList)
             {
@@ -419,13 +424,14 @@ namespace VCBusiness
 
                 #region update order line 
 
-                string ShipCarrier="";
-                string ShipMethod="";
+              
 
                 foreach (TOrder_Line_Item item in productList)
                 {
-                    ShipCarrier = item.ShipCarrier;
-                    ShipMethod = item.ShipMethod;
+                    order.ShipCarrier = item.ShipCarrier;
+                    order.ShipMethod = item.ShipMethod;
+                    order.TrackingNumber = item.TrackingNumber;
+                    order.ShippedDate = item.ShippedDate.Value;
 
                     _result = item.updateOrderLineItemShipment(order.OrderId, item.PartNumber, item.ShippedDate.Value, item.TrackingNumber, _tran);
                     if (_result.Success == false)
@@ -438,11 +444,30 @@ namespace VCBusiness
 
                         continue;
                     }
+
+                    if (this.Owner.OwnerInfo["ImportDM"].ToString() == "Y")
+                    {
+                        TDM_Order_Detail _tDM_Order_Detail = new TDM_Order_Detail();
+                        _result = _tDM_Order_Detail.updateDMShipingInfo(order.OrderId, item.PartNumber, order.ShippedDate.Value, order.TrackingNumber, _tran);
+                        if (_result.Success == false)
+                        {
+                            _tran.RollbackTransaction();
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+
+                            Common.Log("Order : " + order.OrderId + "  updateDMShipingInfo---ER \r\n" + _result.ErrMessage);
+
+                            continue;
+                        }
+                    }
+
+
+
                 }
 
                 #endregion
 
-                #region update release 
+                #region update carton & ASN
 
                 #region get release list
 
@@ -515,8 +540,8 @@ namespace VCBusiness
                     _tOrder_Line_Shipment_Carton.ORDER_ID = order.OrderId;
                     _tOrder_Line_Shipment_Carton.RELEASE_NUM = releaseID;
                     _tOrder_Line_Shipment_Carton.CARTON_ID_FROM = releaseID.ToString();
-                    _tOrder_Line_Shipment_Carton.CARRIER_ID = ShipCarrier;
-                    _tOrder_Line_Shipment_Carton.SHIP_METHOD = ShipMethod;
+                    _tOrder_Line_Shipment_Carton.CARRIER_ID = order.ShipCarrier;
+                    _tOrder_Line_Shipment_Carton.SHIP_METHOD = order.ShipMethod;
                     _tOrder_Line_Shipment_Carton.PACKAGE_TRACE_ID = item.TrackingNumber;
                     _tOrder_Line_Shipment_Carton.Ship_date = item.ShippedDate.Value;
 
@@ -552,7 +577,43 @@ namespace VCBusiness
 
                 #endregion
 
+                #region update phontom item 
+
+                _result = _tOrder.updateOrderPhontomOrderStatus(order.OrderId, order.ShippedDate.Value, order.TrackingNumber, _tran);
+                if (_result.Success == false)
+                {
+                    _tran.RollbackTransaction();
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  updateOrderPhontomOrderStatus---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+                #endregion
+
+                #region customerEventPostShipmentUpdate
+
+                _result = this.customerEventPostShipmentUpdate(order, productList, _tran);
+                if (_result.Success == false)
+                {
+                    _tran.RollbackTransaction();
+                    errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                    failedRecord++;
+
+                    Common.Log("Order : " + order.OrderId + "  customerEventPostShipmentUpdate---ER \r\n" + _result.ErrMessage);
+
+                    continue;
+                }
+
+
+
+                #endregion
+
                 _tran.CommitTransaction();
+
+                #region sent confirm email
 
                 if (Owner.OwnerInfo["ShipConfirmation"].ToString() == "Y")
                 {
@@ -579,6 +640,7 @@ namespace VCBusiness
 
                         #region get email content
 
+                        VCBusiness.EmailFactory EmailFactory = Common.CreateObject(this.Owner, "EmailFactory") as VCBusiness.EmailFactory;
                         _result = EmailFactory.GetMailContent(order.OrderId, releaseID - 1, _tProgram_Email);
                         if (_result.Success == false)
                         {
@@ -611,6 +673,8 @@ namespace VCBusiness
                     }
                 }
 
+                #endregion
+
                 successfulRecord++;
                 Common.Log("Order : " + order.OrderId + "---OK");
             }
@@ -640,5 +704,16 @@ namespace VCBusiness
 
             return _result;
         }
+
+
+        protected virtual ReturnValue customerEventPostShipmentUpdate(TOrder order, EntityList orderLines,Transaction tran)
+        {
+            ReturnValue _result = new ReturnValue();
+
+
+            return _result;
+        }
+
+        #endregion
     }
 }

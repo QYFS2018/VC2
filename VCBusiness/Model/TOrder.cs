@@ -829,6 +829,77 @@ namespace VCBusiness.Model
             }
         }
 
+        private double _totalWholeSaleAmount;
+        [BindingField("TotalWholeSaleAmount", true)]
+        public double TotalWholeSaleAmount
+        {
+            set
+            {
+                _totalWholeSaleAmount = value;
+            }
+            get
+            {
+                return _totalWholeSaleAmount;
+            }
+        }
+
+
+        private double _compProductAmount;
+        [BindingField("CompProductAmount", true)]
+        public double CompProductAmount
+        {
+            set
+            {
+                _compProductAmount = value;
+            }
+            get
+            {
+                return _compProductAmount;
+            }
+        }
+
+        private double _compShipingCost;
+        [BindingField("CompShipingCost", true)]
+        public double CompShipingCost
+        {
+            set
+            {
+                _compShipingCost = value;
+            }
+            get
+            {
+                return _compShipingCost;
+            }
+        }
+
+        private double _compTax;
+        [BindingField("CompTax", true)]
+        public double CompTax
+        {
+            set
+            {
+                _compTax = value;
+            }
+            get
+            {
+                return _compTax;
+            }
+        }
+
+        private int _shipToAddressId;
+        [BindingField("ShipToAddressId", true)]
+        public int ShipToAddressId
+        {
+            set
+            {
+                _shipToAddressId = value;
+            }
+            get
+            {
+                return _shipToAddressId;
+            }
+        }
+
         #endregion 
 
         public virtual ReturnValue getOrderById(int id)
@@ -875,5 +946,11 @@ namespace VCBusiness.Model
             return _result;
         }
 
+        public virtual ReturnValue updateOrderPhontomOrderStatus(int orderId, DateTime shippeddate, string trackingNumber, WComm.Transaction transcation)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateOrderPhontomOrderStatus"), orderId, shippeddate, trackingNumber);
+            ReturnValue _result = this.ExecSql(Usp_SQL, transcation);
+            return _result;
+        }
     }
 }

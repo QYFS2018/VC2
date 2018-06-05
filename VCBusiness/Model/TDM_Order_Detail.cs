@@ -1067,5 +1067,11 @@ namespace VCBusiness.Model
             return _result;
         }
 
+        public ReturnValue updateDMShipingInfo(int orderId, string partNumber, DateTime shippedDate, string trackingNumber,Transaction tran)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateDMShipingInfo"), orderId, partNumber, shippedDate, trackingNumber);
+            ReturnValue _result = this.ExecSql(Usp_SQL, tran);
+            return _result;
+        }
     }
 }

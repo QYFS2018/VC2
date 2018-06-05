@@ -22,6 +22,7 @@
       <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrder" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
 		</ClassType>
 	</Owner>
   <Owner Name="Tecnifibre"  OwnerCode="00999" RegSubKey="Tecnifibre" Enable="true" >
@@ -48,6 +49,7 @@
       <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProduct" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.TecnifibreEmailFactory" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
 </Owners>

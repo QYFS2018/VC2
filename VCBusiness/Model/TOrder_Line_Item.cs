@@ -488,7 +488,37 @@ namespace VCBusiness.Model
             }
         }
 
-    
+     
+
+        private int _programProductId;
+        [BindingField("ProgramProductId", true)]
+        public int ProgramProductId
+        {
+            set
+            {
+                _programProductId = value;
+            }
+            get
+            {
+                return _programProductId;
+            }
+        }
+
+
+        private double _comAmount;
+        [BindingField("ComAmount", true)]
+        public double ComAmount
+        {
+            set
+            {
+                _comAmount = value;
+            }
+            get
+            {
+                return _comAmount;
+            }
+        }
+
 
         #endregion 
 
@@ -496,6 +526,13 @@ namespace VCBusiness.Model
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderId"), id);
             ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
+
+        public ReturnValue getOrderLineByOrderPartNumber(int id, string partNumber, Transaction tran)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderPartNumber"), id, partNumber);
+            ReturnValue _result = this.getEntity(Usp_SQL, tran);
             return _result;
         }
 

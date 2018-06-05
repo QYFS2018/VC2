@@ -38,8 +38,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CreateInvoicePDF">
+      <HintPath>..\..\..\SMQ\Code\PHTransferN\MainTransfer\bin\Debug\CreateInvoicePDF.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetOpenMail">
       <HintPath>..\..\..\SMQ\SMQ06\FiBI\Frontend\FrontEndV4\Bin\DotNetOpenMail.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\SMQ\Code\PHTransferN\MainTransfer\bin\Debug\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,15 +65,23 @@
     <Compile Include="BaseTransfer.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Controler.cs" />
+    <Compile Include="CreatePDF.cs" />
     <Compile Include="EmailFactory.cs" />
+    <Compile Include="Model\TAddress.cs" />
+    <Compile Include="Model\TCustomer.cs" />
     <Compile Include="Model\TDM_Order_Detail.cs" />
+    <Compile Include="Model\TInvoice.cs" />
+    <Compile Include="Model\TInvoice_Line_Item.cs" />
     <Compile Include="Model\TOrder.cs" />
     <Compile Include="Model\TOrder_Line_Item.cs" />
     <Compile Include="Model\TOrder_Line_Shipment_ASN.cs" />
     <Compile Include="Model\TOrder_Line_Shipment_Carton.cs" />
+    <Compile Include="Model\TPaymentArrangement.cs" />
+    <Compile Include="Model\TPaymentTerms.cs" />
     <Compile Include="Model\TProduct.cs" />
     <Compile Include="Model\TProgram_Email.cs" />
     <Compile Include="Model\TOrderTF.cs" />
+    <Compile Include="Model\TUser.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OwnerOrder.cs" />
     <Compile Include="Process.cs" />
