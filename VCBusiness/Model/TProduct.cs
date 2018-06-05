@@ -383,10 +383,26 @@ namespace VCBusiness.Model
             return _result;
         }
 
-        public ReturnValue updateProductEstUnit(int productID, int qty)
+        public ReturnValue updateProductEstUnit(int productID, int estUnit, int onHand)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateProductEstUnit"), productID,qty);
-            ReturnValue _result = this.ExecSql (Usp_SQL);
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateProductEstUnit"), productID, estUnit, onHand);
+            ReturnValue _result = this.ExecSql(Usp_SQL);
+            return _result;
+        }
+
+        public ReturnValue UpdateBOOrder()
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("UpdateBOOrder"));
+            ReturnValue _result = this.ExecSql(Usp_SQL);
+            return _result;
+        }
+
+
+
+        public virtual ReturnValue resetProductEstcommitted()
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("resetProductEstcommitted"));
+            ReturnValue _result = this.ExecSql(Usp_SQL);
             return _result;
         }
      }

@@ -95,7 +95,7 @@ namespace VCBusiness
             
             foreach (TProduct item in productList)
             {
-               _result= VeraCore.GetInventory(VCBusiness.Common.OwnerCode, item.PartNumber);
+               _result= VeraCore.GetInventory(VCBusiness.Common.OwnerCode, item);
                if (_result.Success == false)
                {
                    if (_result.ErrMessage.IndexOf("Can not retrieve any information") > -1)
@@ -116,7 +116,7 @@ namespace VCBusiness
 
                int qty = (int)_result.ObjectValue;
 
-               _result = item.updateProductEstUnit(item.ProductId, qty);
+               _result = item.updateProductEstUnit(item.ProductId, item.EstUnits, item.PHOnHand);
                if (_result.Success == false)
                {
                    errorNotes = errorNotes + item.PartNumber.ToString() + "\r\n" + _result.ErrMessage + "\r\n";

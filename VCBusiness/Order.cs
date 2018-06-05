@@ -74,7 +74,8 @@ namespace VCBusiness
 
                 order.ProgramID = int.Parse(Owner.OwnerInfo["ProgramID"].ToString());
 
-                if (Owner.OwnerInfo.ContainsKey("FreightService") == true)
+
+                if (Owner.OwnerInfo.ContainsKey("FreightService") == true)  // VeraCore Default Shipmethod
                 {
                    ((TOrder_Line_Item) orderItemList[0] ).ShipMethod= Owner.OwnerInfo["FreightService"].ToString();
                 }
@@ -146,10 +147,44 @@ namespace VCBusiness
 
                 #endregion
 
+                #region ImportDMOrderDetail
+
+                if (this.Owner.OwnerInfo["ImportDM"].ToString() == "Y")
+                {
+                    _result = this.ImportDMOrderDetail(order.OrderId);
+                    if (_result.Success == false)
+                    {
+                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                        failedRecord++;
+
+                        Common.Log("Order : " + order.OrderId + "  ImportDMOrderDetail---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+                }
+                #endregion
 
                 successfulRecord++;
                 Common.Log("Order : " + order.OrderId + "---OK");
             }
+
+            #endregion
+
+            #region update stock
+
+            Model.TProduct _tProduct = Common.CreateObject(this.Owner, "TProduct") as Model.TProduct;
+            _result = _tProduct.resetProductEstcommitted();
+            if (_result.Success == false)
+            {
+                _result.Success = false;
+                _result.ErrMessage = "resetProductEstcommitted failed. \r\n " + _result.ErrMessage;
+
+                Common.Log("resetProductEstcommitted---ER \r\n" + _result.ErrMessage);
+
+                return _result;
+            }
+
+
 
             #endregion
 
@@ -183,6 +218,12 @@ namespace VCBusiness
             }
             _tOrderExpectedShipDate = _result.Object as TOrder;
 
+            if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
+            {
+                _tOrderExpectedShipDate.ExpectedShipDate = System.DateTime.Now.AddDays(5);
+            }
+
+
             if (_tOrderExpectedShipDate.ExpectedShipDate==null || _tOrderExpectedShipDate.ExpectedShipDate.Value.Year == 1)
             {
                 _result.Success = false;
@@ -211,6 +252,94 @@ namespace VCBusiness
 
             return _result;
         }
+
+        protected virtual ReturnValue ImportDMOrderDetail(int orderId)
+        {
+            ReturnValue _result = new ReturnValue();
+
+            #region get order line
+
+
+            Model.TDM_Order_Detail _tDM_Order_Detail = Common.CreateObject(this.Owner, "TDM_Order_Detail") as Model.TDM_Order_Detail;
+            _result = _tDM_Order_Detail.getOrderForZoytoPH(orderId);
+
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+
+            EntityList _line = _result.ObjectList;
+
+            if (_line.Count == 0)
+            {
+                _result.Success = false;
+                _result.ErrMessage = "Order : " + orderId.ToString() + " get getOrderForZoytoPH --No Record found";
+                return _result;
+            }
+          
+
+            #endregion
+
+            #region caculcate bonus and qty
+
+            double _order_Bonus = 0;
+            int _quantity = 0;
+
+            foreach (TDM_Order_Detail _item in _line)
+            {
+                if (_item.IsCommissionable == true)
+                {
+                    _order_Bonus += _item.ActualPrice;
+                }
+
+                _quantity += _item.Pieces_Ordered;
+            }
+
+            #endregion
+          
+
+            foreach (TDM_Order_Detail _item in _line)
+            {
+                #region Save Zoyto_PH Order Detail
+
+                _item.Order_Bonus = _order_Bonus;
+                _item.Extended_Cost = _item.Unit_Cost * _item.Pieces_Ordered;
+                _item.CreatedOn = System.DateTime.Now;
+                _item.Owner_Code = Owner.OwnerCode.ToString();
+
+                _item.ReleaseNumber = 1;
+
+                if (_item.B_CountryCode == "UK")
+                {
+                    _item.B_Country = "United Kingdom";
+                }
+
+                if (_item.S_CountryCode == "UK")
+                {
+                    _item.S_Country = "United Kingdom";
+                }
+
+                _item.DataConnectProviders = "ZoytoCommon";
+                _result = _item.Save();
+                if (_result.Success == false)
+                {
+                    if (_result.Code == 2627)
+                    {
+                        _result.Success = true;
+                    }
+                    else
+                    {
+                        _result.Code = -1;
+                        return _result;
+                    }
+                }
+
+                #endregion
+            }
+
+            return _result;
+        }
+
 
         public override ReturnValue UpdateShipment()
         {

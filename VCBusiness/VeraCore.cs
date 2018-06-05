@@ -37,28 +37,29 @@ namespace VCBusiness
 
         }
 
-        public ReturnValue GetInventory(string owner,string sku)
+        public ReturnValue GetInventory(string owner, TProduct tProd)
         {
             ReturnValue _result = new ReturnValue();
 
             try
             {
-                requestXml = owner + "--" + sku;
+                requestXml = owner + "--" + tProd.PartNumber;
 
-                VCBusiness.VeraCoreOMS.ProductAvailabilities[] prod = OMSSoapClient.GetProductAvailabilities(AuthenticationHeader, ref DebugHeader, sku, owner, "", "", "", "");
+                VCBusiness.VeraCoreOMS.ProductAvailabilities[] prod = OMSSoapClient.GetProductAvailabilities(AuthenticationHeader, ref DebugHeader, tProd.PartNumber, owner, "", "", "", "");
 
                 responseXml = WComm.XmlSerializer.Serialize(prod);
 
-                Common.Log(requestXml, responseXml, "GetInventory", sku, true, null);
+                Common.Log(requestXml, responseXml, "GetInventory", tProd.PartNumber, true, null);
 
-                _result.ObjectValue = prod[0].Warehouses[0].OnHand;
+                tProd.EstUnits = prod[0].Warehouses[0].Available;
+                tProd.PHOnHand = prod[0].Warehouses[0].OnHand;
             }
             catch (Exception ex)
             {
                 _result.Success = false;
                 _result.ErrMessage = ex.ToString();
 
-                Common.Log(requestXml, responseXml, "GetInventory", sku, false, _result.ErrMessage);
+                Common.Log(requestXml, responseXml, "GetInventory", tProd.PartNumber, false, _result.ErrMessage);
 
                 return _result;
             }
@@ -366,6 +367,13 @@ namespace VCBusiness
                 Order.Offers[i] = OfferOrdered;
 
                 i++;
+
+
+                if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
+                {
+                    _result = this.PostProduct(VCBusiness.Common.OwnerCode, _line.PartNumber, _line.ProductName);
+                }
+
             }
 
             try

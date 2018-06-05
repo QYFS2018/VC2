@@ -7,9 +7,7 @@
 			<Info Key="ShipConfirmation">Y</Info>
 			<Info Key="ProductClass">HARD GOODS</Info>
 			<Info Key="LogSuccessAction">Y</Info>
-			<Info Key="PhontomStatus">LINE</Info>
 			<Info Key="ImportDM">N</Info>
-			<Info Key="InternationalOrderVerification">N</Info>
 			<Info Key="ExpectedShipDate">N</Info>
       <Info Key="ProgramID">433</Info>
       <Info Key="OrderType">REG</Info>
@@ -26,16 +24,14 @@
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
 		</ClassType>
 	</Owner>
-  <Owner Name="Tecnifibre"  OwnerCode="TECNIF" RegSubKey="Tecnifibre" Enable="true" >
+  <Owner Name="Tecnifibre"  OwnerCode="00999" RegSubKey="Tecnifibre" Enable="true" >
     <OwnerInfo>
-      <Info Key="VeraCoreUserName">TECN_ORD</Info>
-      <Info Key="VeraCorePassword">gxo?5RRZ</Info>
+      <Info Key="VeraCoreUserName">danswebservice</Info>
+      <Info Key="VeraCorePassword">ws#4DanLu</Info>
       <Info Key="ShipConfirmation">Y</Info>
       <Info Key="ProductClass">HARD GOODS</Info>
       <Info Key="LogSuccessAction">Y</Info>
-      <Info Key="PhontomStatus">LINE</Info>
       <Info Key="ImportDM">Y</Info>
-      <Info Key="InternationalOrderVerification">N</Info>
       <Info Key="ExpectedShipDate">Y</Info>
       <Info Key="ProgramID">441</Info>
       <Info Key="OrderType">REG</Info>
@@ -49,7 +45,9 @@
     <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.TecnifibreOrder" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderTF" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProduct" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
 </Owners>

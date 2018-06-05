@@ -60,6 +60,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Controler.cs" />
     <Compile Include="EmailFactory.cs" />
+    <Compile Include="Model\TDM_Order_Detail.cs" />
     <Compile Include="Model\TOrder.cs" />
     <Compile Include="Model\TOrder_Line_Item.cs" />
     <Compile Include="Model\TOrder_Line_Shipment_ASN.cs" />
