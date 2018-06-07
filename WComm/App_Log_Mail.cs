@@ -24,8 +24,8 @@ namespace WComm
 
 		#region Basic Property
 
-		private int? _iD;
-		private DateTime? _createdOn;
+		private int _iD;
+		private DateTime _createdOn;
 		private string _addressFrom;
 		private string _addressTo;
 		private string _addressBcc;
@@ -43,7 +43,7 @@ namespace WComm
 		///		mail log identify.
 		/// </summary>
 		[BindingField("ID",true)]
-		public int? ID
+		public int ID
 		{
 			set
 			{
@@ -58,7 +58,7 @@ namespace WComm
 		///		the create date of this log.
 		/// </summary>
 		[BindingField("CreatedOn",true)]
-		public DateTime? CreatedOn
+		public DateTime CreatedOn
 		{
 			set
 			{

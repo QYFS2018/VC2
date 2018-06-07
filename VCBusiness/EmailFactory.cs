@@ -261,6 +261,265 @@ namespace VCBusiness
             ReturnValue _result = new ReturnValue();
 
 
+            System.Globalization.NumberFormatInfo nfi = Utilities.CurrentNumberFormat;
+
+            #region getCustomerInfo
+            TOrderTF _tOrder = new TOrderTF();
+            _result = _tOrder.getOrderById(orderId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            _tOrder = _result.Object as TOrderTF;
+
+            if (_tOrder.SourceId == 19)
+            {
+                _result.Code = 19;
+                return _result;
+            }
+
+
+            TCustomer _tCustomer = new TCustomer();
+            _result = _tCustomer.getCustomerById(_tOrder.PWPCustomerId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            _tCustomer = _result.Object as TCustomer;
+
+
+
+            TOrder_Line_Item _tOrder_Line_Item = new TOrder_Line_Item();
+            _result = _tOrder_Line_Item.getOrderDetailsByOrderId(_tOrder.OrderId, releaseID);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            EntityList _list = _result.ObjectList;
+
+            if (_list.Count == 0)
+            {
+                return _result;
+            }
+
+            _tOrder_Line_Item = _list[0] as TOrder_Line_Item;
+
+            TShipMethod _tShipMethod = new TShipMethod();
+            _result = _tShipMethod.getShipMethodById(_tOrder_Line_Item.ShipMethodId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            _tShipMethod = _result.Object as TShipMethod;
+
+
+            TAddress _tBillAddress = new TAddress();
+            _result = _tBillAddress.getAddressById(_tOrder.CustomerAddressId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            _tBillAddress = _result.Object as TAddress;
+
+
+
+            TAddress _tShipAddress = new TAddress();
+            _result = _tBillAddress.getAddressById(_tOrder.ShipToAddressId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            _tShipAddress = _result.Object as TAddress;
+
+
+            TPaymentArrangement _tPaymentArrangement = new TPaymentArrangement();
+            _result = _tPaymentArrangement.getPaymentArrangementList(orderId);
+            if (!_result.Success)
+            {
+
+                return _result;
+            }
+            EntityList _paymentList = _result.ObjectList;
+
+
+            double _paymentApplied = 0;
+            double _estimatedAmountDue = 0;
+
+            foreach (TPaymentArrangement _item in _paymentList)
+            {
+                if (_item.PayMethodId == 4)
+                {
+                    _estimatedAmountDue += _item.Amount;
+                }
+                else
+                {
+                    _paymentApplied += _item.Amount;
+                }
+            }
+
+
+
+
+            #endregion
+
+
+            try
+            {
+                #region setup EmailMessage
+
+                EmailMessage _mail = new EmailMessage();
+
+                string MailContent = HttpUtility.HtmlDecode(mi.FullHtml);
+
+                #region filter the email content
+                MailContent = MailContent.Replace("[CustomerName]", _tCustomer.FirstName == null ? "" : _tCustomer.FirstName.ToString());
+                MailContent = MailContent.Replace("[OrderDate]", _tOrder.OrderDate.ToString("MM/dd/yyyy"));
+
+                string siteURL = "http://admin.tecnifibreusa.com/";
+                MailContent = MailContent.Replace("[WebSite]", siteURL);
+                MailContent = MailContent.Replace("[OrderNumber]", _tOrder.AltOrderNum);
+                MailContent = MailContent.Replace("[PONumber]", _tOrder.PONumber);
+                MailContent = MailContent.Replace("[CustomerAcct]", _tCustomer.AltCustNum);
+                MailContent = MailContent.Replace("[ShipMethod]", _tShipMethod.Description);
+
+                MailContent = MailContent.Replace("[BillingAddress]", _tBillAddress.Company + "<br> " + _tBillAddress.Address1 + " " + _tBillAddress.Address2 + "<br>" + _tBillAddress.City + ", " + _tBillAddress.StateCode + " " + _tBillAddress.PostalCode);
+                MailContent = MailContent.Replace("[ShippingAddress]", _tShipAddress.Company + "<br> " + _tShipAddress.Address1 + " " + _tShipAddress.Address2 + "<br>" + _tShipAddress.City + ", " + _tShipAddress.StateCode + " " + _tShipAddress.PostalCode);
+
+                MailContent = MailContent.Replace("[SubTotal]", (_tOrder.TotalWholeSaleAmount - _tOrder.CompProductAmount).ToString("C", Utilities.CurrentNumberFormat));
+                MailContent = MailContent.Replace("[Tax]", "(" + Utilities.Round(_tOrder.TaxRate * 100, 2).ToString() + "%)" + (_tOrder.TotalTax - _tOrder.CompTax).ToString("C", Utilities.CurrentNumberFormat));
+                MailContent = MailContent.Replace("[Shipping]", (_tOrder.TotalShipping - _tOrder.CompShipingCost).ToString("C", Utilities.CurrentNumberFormat));
+                MailContent = MailContent.Replace("[Discount]", (_tOrder.TotalDiscountAmount + _tOrder.CompProductAmount).ToString("C", Utilities.CurrentNumberFormat));
+                MailContent = MailContent.Replace("[OrderTotal]", _tOrder.TotalOrderAmount.ToString("C", Utilities.CurrentNumberFormat));
+
+                MailContent = MailContent.Replace("[PaymentApplied]", _paymentApplied.ToString("C", Utilities.CurrentNumberFormat));
+                MailContent = MailContent.Replace("[EstimatedAmountDue]", _estimatedAmountDue.ToString("C", Utilities.CurrentNumberFormat));
+
+                MailContent = MailContent.Replace("[BFirstName]", _tBillAddress.FirstName);
+                MailContent = MailContent.Replace("[BLastName]", _tBillAddress.LastName);
+                MailContent = MailContent.Replace("[SFirstName]", _tShipAddress.FirstName);
+                MailContent = MailContent.Replace("[SLastName]", _tShipAddress.LastName);
+
+
+                StringBuilder OrderItemHTML = new StringBuilder();
+
+                foreach (TOrder_Line_Item _item in _list)
+                {
+                    OrderItemHTML.Append("<tr>");
+                    OrderItemHTML.Append("  <td>" + _item.LineNum + "</td>");
+                    OrderItemHTML.Append("<td>" + _item.PartNumber + "</td>");
+                    OrderItemHTML.Append("<td>" + _item.ProductName + "</td>");
+                    OrderItemHTML.Append("<td>" + _item.Quantity + "</td>");
+                    if (_item.ShippedDate != null)
+                    {
+                        OrderItemHTML.Append("<td>" + _item.ShippedDate.Value.ToString("MM/dd/yyyy") + "</td>");
+                    }
+                    else
+                    {
+                        OrderItemHTML.Append("<td></td>");
+                    }
+                    OrderItemHTML.Append("<td>" + _item.TrackingNumber + "</td>");
+                    OrderItemHTML.Append("<td>" + _item.Price.ToString("C", Utilities.CurrentNumberFormat) + "</td>");
+                    OrderItemHTML.Append("<td>" + (_item.DiscountAmount + _item.ComAmount).ToString("C", Utilities.CurrentNumberFormat) + "</td>");
+                    OrderItemHTML.Append("<td>" + ((_item.ActualPrice - _item.ComAmount) / _item.Quantity).ToString("C", Utilities.CurrentNumberFormat) + "</td>");
+                    OrderItemHTML.Append("<td>" + (_item.ActualPrice - _item.ComAmount).ToString("C", Utilities.CurrentNumberFormat) + "</td>");
+                    OrderItemHTML.Append("</tr>");
+                }
+                #endregion
+
+
+                MailContent = MailContent.Replace("[Items]", OrderItemHTML.ToString());
+
+
+                _mail.HtmlPart = new HtmlAttachment(MailContent);
+
+
+                _mail.FromAddress = new EmailAddress(mi.RespondTo);
+                _mail.Subject = mi.Subject;
+
+                if (Common.IsTest == true)
+                {
+                    string[] maillist = Common.TestMailTo.Split(';');
+                    foreach (string _item in maillist)
+                    {
+                        _mail.AddToAddress(new EmailAddress(_item));
+
+                    }
+
+                    _result.Table = Common.TestMailTo;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(_tCustomer.Email) == true)
+                    {
+                        _result.Success = false;
+                        _result.ErrMessage = "Email To Address is empty";
+                        return _result;
+                    }
+                    else
+                    {
+                        _mail.AddToAddress(new EmailAddress(_tCustomer.Email));
+                    }
+
+                    _result.Table = _tCustomer.Email;
+                }
+
+
+                if (string.IsNullOrEmpty(mi.BccAddress) == false)
+                {
+                    string[] bcclist = mi.BccAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        if (string.IsNullOrEmpty(_item) == false)
+                        {
+                            _mail.AddBccAddress(new EmailAddress(_item));
+                        }
+                    }
+                }
+                if (string.IsNullOrEmpty(mi.CCAddress) == false)
+                {
+                    string[] bcclist = mi.CCAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        if (string.IsNullOrEmpty(_item) == false)
+                        {
+                            _mail.AddCcAddress(new EmailAddress(_item));
+                        }
+                    }
+                }
+
+
+                if (string.IsNullOrEmpty(_tCustomer.OrderEmail) == false)
+                {
+                    _mail.AddCcAddress(new EmailAddress(_tCustomer.OrderEmail));
+                }
+                if (string.IsNullOrEmpty(_tCustomer.SecondaryEmail) == false)
+                {
+                    _mail.AddCcAddress(new EmailAddress(_tCustomer.SecondaryEmail));
+                }
+
+                if (string.IsNullOrEmpty(_tCustomer.SalesRepEmail) == false)
+                {
+                    _mail.AddBccAddress(new EmailAddress(_tCustomer.SalesRepEmail));
+                }
+
+
+                _result.ObjectValue = _mail;
+
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                _result.Success = false;
+                _result.ErrMessage = ex.ToString();
+            }
+
 
             return _result;
         }
@@ -275,7 +534,7 @@ namespace VCBusiness
 
             System.Globalization.NumberFormatInfo nfi = Utilities.CurrentNumberFormat;
 
-            Model.TProgram_Email _tProgram_Email = new TProgram_Email();
+            Model.TProgram_EmailTF _tProgram_Email = new TProgram_EmailTF();
 
             try
             {
@@ -295,7 +554,7 @@ namespace VCBusiness
                 {
                     return _result;
                 }
-                _tProgram_Email = _result.Object as Model.TProgram_Email;
+                _tProgram_Email = _result.Object as Model.TProgram_EmailTF;
 
                 string _mailHtmlContent = System.Web.HttpUtility.HtmlDecode(System.Web.HttpUtility.HtmlDecode(_tProgram_Email.FullHtml));
 
@@ -442,6 +701,7 @@ namespace VCBusiness
             return _result;
         }
 
+        
 
 
     }

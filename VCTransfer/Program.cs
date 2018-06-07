@@ -27,10 +27,10 @@ namespace VCTransfer
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore("TECN_ORD","gxo?5RRZ");
             //_result = VeraCore.PostProduct("TECNIF", "Test001", "Test001");
 
-            string sourceKey = Encrypt.EncryptData("junjun", "2020-6-20");
+            //string sourceKey = Encrypt.EncryptData("junjun", "2018-8-20");
 
 
-            sourceKey = Encrypt.DecryptData("junjun", "oWS2Dpkw7LXDByVYTyUIAw==");
+          //  sourceKey = Encrypt.DecryptData("junjun", "TXdBnhxTdmZZZamCakg6Qg==");
             //VCBusiness.VeraCore VeraCore = new VCBusiness.VeraCore();
             //_result = VeraCore.GetInventory("00999","00999-3");
             //_result = VeraCore.PostProduct("00999", "00999-31","aaaa009");

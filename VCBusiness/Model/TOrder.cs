@@ -900,6 +900,63 @@ namespace VCBusiness.Model
             }
         }
 
+        public int _sourceId;
+        [BindingField("SourceId", true)]
+        public int SourceId
+        {
+            set
+            {
+                _sourceId = value;
+            }
+            get
+            {
+                return _sourceId;
+            }
+        }
+
+        private int _customerAddressId;
+        [BindingField("CustomerAddressId", true)]
+        public int CustomerAddressId
+        {
+            set
+            {
+                _customerAddressId = value;
+            }
+            get
+            {
+                return _customerAddressId;
+            }
+        }
+
+
+        private double _taxRate;
+        [BindingField("TaxRate", true)]
+        public double TaxRate
+        {
+            set
+            {
+                _taxRate = value;
+            }
+            get
+            {
+                return _taxRate;
+            }
+        }
+
+        public double _totalDiscountAmount;
+        [BindingField("TotalDiscountAmount", true)]
+        public double TotalDiscountAmount
+        {
+            set
+            {
+                _totalDiscountAmount = value;
+            }
+            get
+            {
+                return _totalDiscountAmount;
+            }
+        }
+
         #endregion 
 
         public virtual ReturnValue getOrderById(int id)

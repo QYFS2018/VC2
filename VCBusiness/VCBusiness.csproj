@@ -81,6 +81,8 @@
     <Compile Include="Model\TProduct.cs" />
     <Compile Include="Model\TProgram_Email.cs" />
     <Compile Include="Model\TOrderTF.cs" />
+    <Compile Include="Model\TProgram_EmailTF.cs" />
+    <Compile Include="Model\TShipMethod.cs" />
     <Compile Include="Model\TUser.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OwnerOrder.cs" />

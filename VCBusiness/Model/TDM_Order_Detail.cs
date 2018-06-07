@@ -10,7 +10,7 @@ namespace VCBusiness.Model
     {
         public TDM_Order_Detail()
         {
-
+            this.DataConnectProviders = "ZoytoCommon";
         }
 
         #region Basic Property
@@ -1067,10 +1067,10 @@ namespace VCBusiness.Model
             return _result;
         }
 
-        public ReturnValue updateDMShipingInfo(int orderId, string partNumber, DateTime shippedDate, string trackingNumber,Transaction tran)
+        public ReturnValue updateDMShipingInfo(int orderId, string partNumber, DateTime shippedDate, string trackingNumber)
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("updateDMShipingInfo"), orderId, partNumber, shippedDate, trackingNumber);
-            ReturnValue _result = this.ExecSql(Usp_SQL, tran);
+            ReturnValue _result = this.ExecSql(Usp_SQL);
             return _result;
         }
     }

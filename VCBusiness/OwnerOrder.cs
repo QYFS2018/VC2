@@ -155,7 +155,7 @@ namespace VCBusiness
                 _tInvoice_Line_Item.ReleaseNumber = _tOrder_Line_Item.ReleaseNumber.Value;
 
                 _tInvoice_Line_Item.OrderLineItemId = _tOrder_Line_Item.OrderLineItemId;
-                _tInvoice_Line_Item.Amount = (_tOrder_Line_Item.ActualPrice - -_tOrder_Line_Item.ComAmount) * (item.Quantity / _tOrder_Line_Item.Quantity);
+                _tInvoice_Line_Item.Amount = (_tOrder_Line_Item.ActualPrice - _tOrder_Line_Item.ComAmount) * (item.Quantity / _tOrder_Line_Item.Quantity);
                 _tInvoice_Line_Item.Price = _tInvoice_Line_Item.Amount / item.Quantity;
                 _result = _tInvoice_Line_Item.Save(tran);
                 if (_result.Success == false)

@@ -371,7 +371,7 @@ namespace VCBusiness
 
                 if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
                 {
-                    _result = this.PostProduct(VCBusiness.Common.OwnerCode, _line.PartNumber, _line.ProductName);
+                     this.PostProduct(VCBusiness.Common.OwnerCode, _line.PartNumber, _line.ProductName);
                 }
 
             }
@@ -394,6 +394,7 @@ namespace VCBusiness
                 Common.Log(requestXml, responseXml, "PostOrder", order.OrderId.ToString(), false, _result.ErrMessage);
             }
 
+            
 
             return _result;
 

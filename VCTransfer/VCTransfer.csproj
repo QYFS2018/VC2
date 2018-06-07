@@ -105,6 +105,8 @@
     <Content Include="bin\Debug\Controler.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="bin\Debug\Images\tf-logo-pdf-small.JPG" />
+    <Content Include="bin\Debug\Images\tf-logo-pdf.JPG" />
     <Content Include="ShipUpdate.xml">
       <SubType>Designer</SubType>
     </Content>

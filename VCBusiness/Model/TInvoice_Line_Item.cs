@@ -274,14 +274,14 @@ namespace VCBusiness.Model
 
          public ReturnValue getInvoice_Line_ItemListByInvoiceId(int invoiceId)
          {
-             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getInvoice_Line_ItemListByInvoiceId", "CreateInvoicePDF"), invoiceId);
+             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getInvoice_Line_ItemListByInvoiceId"), invoiceId);
              ReturnValue _result = this.getEntityList(Usp_SQL);
              return _result;
          }
 
          public ReturnValue getShipDiscount(int invoiceId)
          {
-             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getShipDiscount", "CreateInvoicePDF"), invoiceId);
+             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getShipDiscount"), invoiceId);
              ReturnValue _result = this.getEntity(Usp_SQL);
              return _result;
          }

@@ -321,7 +321,7 @@ namespace VCBusiness
                     _item.S_Country = "United Kingdom";
                 }
 
-                _item.DataConnectProviders = "ZoytoCommon";
+              
                 _result = _item.Save();
                 if (_result.Success == false)
                 {
@@ -368,7 +368,7 @@ namespace VCBusiness
 
             EntityList orderList = _result.ObjectList;
 
-            TProgram_Email _tProgram_Email = new TProgram_Email();
+            VCBusiness.Model.TProgram_Email _tProgram_Email = Common.CreateObject(this.Owner, "TProgram_Email") as VCBusiness.Model.TProgram_Email;
             _result = _tProgram_Email.getEmailTemplate("SHIP_CONFIRMATION");
             if (_result.Success == false)
             {
@@ -392,30 +392,58 @@ namespace VCBusiness
             {
                 #region GetOrderShipmentInfo
 
-                _result = VeraCore.GetOrderShipmentInfo(order.OrderId.ToString ());
-                if (_result.Success == false)
-                {
-                    if (_result.ErrMessage.IndexOf("Invalid Order ID") > -1)
-                    {
-                        _result.ErrMessage = "Can't find the order";
-                    }
-                    else
-                    {
-                        errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
-                        failedRecord++;
-                    }
-                    Common.Log("Order : " + order.OrderId + "  GetOrderShipmentInfo---ER \r\n" + _result.ErrMessage);
+                EntityList productList = new EntityList();
 
-                    continue;
+                if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
+                {
+                    #region test
+
+
+                    TOrder_Line_Item orderline = new TOrder_Line_Item();
+                    _result = orderline.getOrderLineItemsByOrderId(order.OrderId);
+
+                    foreach (TOrder_Line_Item item in _result.ObjectList)
+                    {
+                        item.ShipCarrier = "UPS";
+                        item.ShipMethod = "STD";
+                        item.TrackingNumber = "123456789";
+                        item.ShippedDate = System.DateTime.Now;
+                        productList.Add(item);
+                    }
+
+                    #endregion
                 }
-
-                EntityList productList = _result.ObjectList;
-
-                if (productList.Count() == 0)
+                else
                 {
-                    Common.Log("Order : " + order.OrderId + "---Unshipped");
+                    #region call Veracore
 
-                    continue;
+                    _result = VeraCore.GetOrderShipmentInfo(order.OrderId.ToString());
+                    if (_result.Success == false)
+                    {
+                        if (_result.ErrMessage.IndexOf("Invalid Order ID") > -1)
+                        {
+                            _result.ErrMessage = "Can't find the order";
+                        }
+                        else
+                        {
+                            errorNotes = errorNotes + order.OrderId.ToString() + "\r\n" + _result.ErrMessage + "\r\n";
+                            failedRecord++;
+                        }
+                        Common.Log("Order : " + order.OrderId + "  GetOrderShipmentInfo---ER \r\n" + _result.ErrMessage);
+
+                        continue;
+                    }
+
+                    productList = _result.ObjectList;
+
+                    if (productList.Count() == 0)
+                    {
+                        Common.Log("Order : " + order.OrderId + "---Unshipped");
+
+                        continue;
+                    }
+
+                    #endregion
                 }
 
                 #endregion
@@ -424,6 +452,7 @@ namespace VCBusiness
 
                 #region update order line 
 
+              
               
 
                 foreach (TOrder_Line_Item item in productList)
@@ -448,7 +477,7 @@ namespace VCBusiness
                     if (this.Owner.OwnerInfo["ImportDM"].ToString() == "Y")
                     {
                         TDM_Order_Detail _tDM_Order_Detail = new TDM_Order_Detail();
-                        _result = _tDM_Order_Detail.updateDMShipingInfo(order.OrderId, item.PartNumber, order.ShippedDate.Value, order.TrackingNumber, _tran);
+                        _result = _tDM_Order_Detail.updateDMShipingInfo(order.OrderId, item.PartNumber, order.ShippedDate.Value, order.TrackingNumber);
                         if (_result.Success == false)
                         {
                             _tran.RollbackTransaction();
@@ -522,7 +551,7 @@ namespace VCBusiness
                 int releaseID = 1;
                 foreach (TOrder_Line_Item item in _releaseList)
                 {
-                    #region update release 
+                    #region update release number && carton && ASN
 
                     _result = item.updateOrderReleaseByTracking(order.OrderId,item.TrackingNumber,releaseID, _tran);
                     if (_result.Success == false)

@@ -520,11 +520,45 @@ namespace VCBusiness.Model
         }
 
 
+        private int _shipMethodId;
+        [BindingField("ShipMethodId", true)]
+        public int ShipMethodId
+        {
+            set
+            {
+                _shipMethodId = value;
+            }
+            get
+            {
+                return _shipMethodId;
+            }
+        }
+
+        private double _discountAmount;
+        [BindingField("DiscountAmount", true)]
+        public double DiscountAmount
+        {
+            set
+            {
+                _discountAmount = value;
+            }
+            get
+            {
+                return _discountAmount;
+            }
+        }
         #endregion 
 
         public  ReturnValue getOrderLineByOrderId(int id)
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderId"), id);
+            ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
+
+        public ReturnValue getOrderLineItemsByOrderId(int id)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineItemsByOrderId"), id);
             ReturnValue _result = this.getEntityList(Usp_SQL);
             return _result;
         }

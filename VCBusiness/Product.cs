@@ -114,7 +114,7 @@ namespace VCBusiness
                }
 
 
-               int qty = (int)_result.ObjectValue;
+               
 
                _result = item.updateProductEstUnit(item.ProductId, item.EstUnits, item.PHOnHand);
                if (_result.Success == false)
@@ -128,7 +128,22 @@ namespace VCBusiness
                }
 
                successfulRecord++;
-               Common.Log("Item : " + item.PartNumber + "---OK---" + qty);
+               Common.Log("Item : " + item.PartNumber + "---OK---" + item.EstUnits + "--" + item.PHOnHand);
+            }
+
+            #endregion
+
+            #region UpdateBOOrder
+
+            _result = _tProduct.UpdateBOOrder();
+            if (_result.Success == false)
+            {
+                _result.Success = false;
+                _result.ErrMessage = "UpdateBOOrder failed. \r\n " + _result.ErrMessage;
+
+                Common.Log("UpdateBOOrder---ER \r\n" + _result.ErrMessage);
+
+                return _result;
             }
 
             #endregion
