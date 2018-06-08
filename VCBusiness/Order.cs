@@ -321,7 +321,7 @@ namespace VCBusiness
                     _item.S_Country = "United Kingdom";
                 }
 
-              
+                _tDM_Order_Detail.DataConnectProviders = "ZoytoPH";
                 _result = _item.Save();
                 if (_result.Success == false)
                 {
@@ -477,6 +477,7 @@ namespace VCBusiness
                     if (this.Owner.OwnerInfo["ImportDM"].ToString() == "Y")
                     {
                         TDM_Order_Detail _tDM_Order_Detail = new TDM_Order_Detail();
+                        _tDM_Order_Detail.DataConnectProviders = "ZoytoPH";
                         _result = _tDM_Order_Detail.updateDMShipingInfo(order.OrderId, item.PartNumber, order.ShippedDate.Value, order.TrackingNumber);
                         if (_result.Success == false)
                         {

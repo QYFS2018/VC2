@@ -10,7 +10,7 @@ namespace VCBusiness.Model
     {
         public TDM_Order_Detail()
         {
-            this.DataConnectProviders = "ZoytoCommon";
+            
         }
 
         #region Basic Property
