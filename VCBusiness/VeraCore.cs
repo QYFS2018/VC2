@@ -316,11 +316,15 @@ namespace VCBusiness
                 OrderShipTo.ThirdPartyAccountNumber = order.ShippingAccountNumber;
             }
 
-            OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
-            OrderShipTo.FreightCarrier.Name = orderItem.ShipCarrier;
+            //OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
+            //OrderShipTo.FreightCarrier.Name = orderItem.ShipCarrier;
 
-            OrderShipTo.FreightService = new VCBusiness.VeraCoreOMS.FreightService();
-            OrderShipTo.FreightService.Description = orderItem.ShipMethod;
+            //OrderShipTo.FreightService = new VCBusiness.VeraCoreOMS.FreightService();
+            //OrderShipTo.FreightService.Description = orderItem.ShipMethod;
+
+            
+
+
 
             if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
             {
@@ -342,6 +346,15 @@ namespace VCBusiness
 
             Order.Classification = new OrderClassification();
             Order.Classification.CampaignID = order.PartyCode;
+
+            ShippingOption ShippingOption = new ShippingOption();
+            ShippingOption.Description = orderItem.ShipMethod;
+            
+            
+            OrderShipping OrderShipping = new VeraCoreOMS.OrderShipping();
+            OrderShipping.ShippingOption = ShippingOption;
+
+            Order.Shipping = OrderShipping;
 
             Order.Offers = new VCBusiness.VeraCoreOMS.OfferOrdered[orderline.Count];
 

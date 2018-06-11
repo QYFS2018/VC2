@@ -50,6 +50,7 @@ namespace VCBusiness
                     Order.Owner = owner;
                     VCBusiness.BaseProduct Product = Common.CreateObject(owner, "Product") as VCBusiness.BaseProduct;
                     Product.Owner = owner;
+                    Common.ProcessType = action;
 
                     #endregion
 
@@ -57,6 +58,7 @@ namespace VCBusiness
 
                     if (action.ToUpper() == "OrderDownload".ToUpper())
                     {
+                        Common.Log("Start OrderDownload");
                         _result = Order.Download();
                     }
 
