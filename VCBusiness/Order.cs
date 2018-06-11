@@ -255,7 +255,7 @@ namespace VCBusiness
             return _result;
         }
 
-        protected virtual ReturnValue ImportDMOrderDetail(int orderId)
+        public override ReturnValue ImportDMOrderDetail(int orderId)
         {
             ReturnValue _result = new ReturnValue();
 
@@ -269,6 +269,10 @@ namespace VCBusiness
             {
                 return _result;
             }
+
+
+            Common.Log("getOrderForZoytoPH---OK \r\n" + _result.ObjectList.Count().ToString ());
+
 
             EntityList _line = _result.ObjectList;
 
@@ -321,7 +325,7 @@ namespace VCBusiness
                     _item.S_Country = "United Kingdom";
                 }
 
-                _tDM_Order_Detail.DataConnectProviders = "ZoytoPH";
+                _item.DataConnectProviders = "ZoytoPH";
                 _result = _item.Save();
                 if (_result.Success == false)
                 {

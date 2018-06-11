@@ -39,6 +39,11 @@ namespace VCBusiness
             return new ReturnValue();
         }
 
+        public virtual ReturnValue ImportDMOrderDetail(int orderID)
+        {
+            return new ReturnValue();
+        }
+
         public virtual ReturnValue UpdateShipment()
         {
             return new ReturnValue();

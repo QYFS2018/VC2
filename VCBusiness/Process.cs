@@ -110,6 +110,13 @@ namespace VCBusiness
                         #endregion
                     }
 
+
+
+                    if (action.ToUpper() == "ImportDMOrderDetail".ToUpper())
+                    {
+                        _result = Order.ImportDMOrderDetail(int.Parse(oid));
+                    }
+
                     #endregion
 
                     if (_result.Success == false)
