@@ -107,5 +107,12 @@ namespace VCTransfer
 
             Process("ShipConfirmEmail");
         }
+
+        private void ImportDMOrderDetail_Click(object sender, EventArgs e)
+        {
+            if (!confirm("ImportDMOrderDetail")) return;
+
+            Process("ImportDMOrderDetail");
+        }
     }
 }

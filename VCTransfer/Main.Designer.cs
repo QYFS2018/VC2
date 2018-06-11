@@ -36,6 +36,7 @@
             this.OID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cb_Owner = new System.Windows.Forms.ComboBox();
+            this.ImportDMOrderDetail = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OrderDownload
@@ -114,11 +115,22 @@
             this.cb_Owner.Size = new System.Drawing.Size(405, 20);
             this.cb_Owner.TabIndex = 10;
             // 
+            // ImportDMOrderDetail
+            // 
+            this.ImportDMOrderDetail.Location = new System.Drawing.Point(358, 192);
+            this.ImportDMOrderDetail.Name = "ImportDMOrderDetail";
+            this.ImportDMOrderDetail.Size = new System.Drawing.Size(128, 57);
+            this.ImportDMOrderDetail.TabIndex = 12;
+            this.ImportDMOrderDetail.Text = "ImportDMOrderDetail";
+            this.ImportDMOrderDetail.UseVisualStyleBackColor = true;
+            this.ImportDMOrderDetail.Click += new System.EventHandler(this.ImportDMOrderDetail_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 350);
+            this.Controls.Add(this.ImportDMOrderDetail);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cb_Owner);
             this.Controls.Add(this.OID);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.TextBox OID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cb_Owner;
+        private System.Windows.Forms.Button ImportDMOrderDetail;
     }
 }
 
