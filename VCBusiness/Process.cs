@@ -86,7 +86,7 @@ namespace VCBusiness
 
                         Common.Log("Start ShipConfirmEmail");
 
-                        TProgram_Email _tProgram_Email = new TProgram_Email();
+                        VCBusiness.Model.TProgram_Email _tProgram_Email = Common.CreateObject(owner, "TProgram_Email") as VCBusiness.Model.TProgram_Email;
                         _result = _tProgram_Email.getEmailTemplate("SHIP_CONFIRMATION");
                         if (_result.Success == false)
                         {
@@ -95,7 +95,8 @@ namespace VCBusiness
 
                         _tProgram_Email = _result.Object as TProgram_Email;
 
-                        EmailFactory EmailFactory = new VCBusiness.EmailFactory();
+                        
+                        VCBusiness.EmailFactory EmailFactory = Common.CreateObject(owner, "EmailFactory") as VCBusiness.EmailFactory;
                         _result = EmailFactory.GetMailContent(int.Parse(oid), 1, _tProgram_Email);
                         if (_result.Success == false)
                         {

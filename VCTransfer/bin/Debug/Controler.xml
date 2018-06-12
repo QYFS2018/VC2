@@ -44,6 +44,7 @@
       <Action Code="ProductDownload" Enable="true"/>
       <Action Code="UpdateInventoryStatus" Enable="true"/>
       <Action Code="ImportDMOrderDetail" Enable="true"/>
+      <Action Code="ShipConfirmEmail" Enable="true"/>
     </Actions>
     <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.TecnifibreOrder" AssemblyFile="VCBusiness.dll"/>
