@@ -114,5 +114,12 @@ namespace VCTransfer
 
             Process("ImportDMOrderDetail");
         }
+
+        private void GenerateInvoicePDF_Click(object sender, EventArgs e)
+        {
+            if (!confirm("GenerateInvoicePDF")) return;
+
+            Process("GenerateInvoicePDF");
+        }
     }
 }

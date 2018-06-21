@@ -563,9 +563,9 @@ namespace VCBusiness.Model
             return _result;
         }
 
-        public ReturnValue getOrderLineByOrderPartNumber(int id, string partNumber, Transaction tran)
+        public ReturnValue getOrderLineByOrderPartNumber(int id, string partNumber, int qty,Transaction tran)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderPartNumber"), id, partNumber);
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderPartNumber"), id, partNumber,qty);
             ReturnValue _result = this.getEntity(Usp_SQL, tran);
             return _result;
         }

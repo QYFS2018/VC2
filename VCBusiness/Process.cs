@@ -120,6 +120,11 @@ namespace VCBusiness
                         _result = Order.ImportDMOrderDetail(int.Parse(oid));
                     }
 
+                    if (action.ToUpper() == "GenerateInvoicePDF".ToUpper())
+                    {
+                        VCBusiness.TecnifibreInvoicePDF TecnifibreInvoicePDF = new TecnifibreInvoicePDF();
+                        _result = TecnifibreInvoicePDF.PrintInvoice(int.Parse(oid));
+                    }
                     #endregion
 
                     if (_result.Success == false)

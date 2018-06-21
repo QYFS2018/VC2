@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cb_Owner = new System.Windows.Forms.ComboBox();
             this.ImportDMOrderDetail = new System.Windows.Forms.Button();
+            this.GenerateInvoicePDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OrderDownload
@@ -125,11 +126,22 @@
             this.ImportDMOrderDetail.UseVisualStyleBackColor = true;
             this.ImportDMOrderDetail.Click += new System.EventHandler(this.ImportDMOrderDetail_Click);
             // 
+            // GenerateInvoicePDF
+            // 
+            this.GenerateInvoicePDF.Location = new System.Drawing.Point(358, 119);
+            this.GenerateInvoicePDF.Name = "GenerateInvoicePDF";
+            this.GenerateInvoicePDF.Size = new System.Drawing.Size(128, 57);
+            this.GenerateInvoicePDF.TabIndex = 13;
+            this.GenerateInvoicePDF.Text = "Generate Invoice PDF";
+            this.GenerateInvoicePDF.UseVisualStyleBackColor = true;
+            this.GenerateInvoicePDF.Click += new System.EventHandler(this.GenerateInvoicePDF_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 350);
+            this.Controls.Add(this.GenerateInvoicePDF);
             this.Controls.Add(this.ImportDMOrderDetail);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cb_Owner);
@@ -160,6 +172,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cb_Owner;
         private System.Windows.Forms.Button ImportDMOrderDetail;
+        private System.Windows.Forms.Button GenerateInvoicePDF;
     }
 }
 

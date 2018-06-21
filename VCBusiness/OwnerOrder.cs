@@ -136,7 +136,7 @@ namespace VCBusiness
 
             foreach (TOrder_Line_Item item in orderline)
             {
-                _result = item.getOrderLineByOrderPartNumber(order.OrderId, item.PartNumber, tran);
+                _result = item.getOrderLineByOrderPartNumber(order.OrderId, item.PartNumber, item.Quantity,tran);
                 if (_result.Success == false)
                 {
                     return _result;
