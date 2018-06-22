@@ -394,6 +394,8 @@ namespace VCBusiness
 
             foreach (TOrder order in orderList)
             {
+                Common.Log("Order : " + order.OrderId );
+
                 #region GetOrderShipmentInfo
 
                 EntityList productList = new EntityList();

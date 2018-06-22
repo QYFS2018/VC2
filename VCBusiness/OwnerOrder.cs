@@ -143,6 +143,11 @@ namespace VCBusiness
                 }
                 TOrder_Line_Item _tOrder_Line_Item = _result.Object as TOrder_Line_Item;
 
+                if (_tOrder_Line_Item.ShippedDate == null || _tOrder_Line_Item.Quantity == 0 || item.Quantity==0)
+                {
+                    continue;
+                }
+
                 TInvoice_Line_Item _tInvoice_Line_Item = new TInvoice_Line_Item();
                 _tInvoice_Line_Item.InvoiceId = _tInvoice.InvoiceId;
                 _tInvoice_Line_Item.LineNum = _tOrder_Line_Item.LineNum;
