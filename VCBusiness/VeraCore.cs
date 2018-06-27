@@ -275,21 +275,23 @@ namespace VCBusiness
 
             Order.OrderedBy = OrderedBy;
 
+            if (string.IsNullOrWhiteSpace(order.D_ADDRESS1) == false)
+            {
+                VCBusiness.VeraCoreOMS.OrderBillTo OrderBillTo = new VeraCoreOMS.OrderBillTo();
+                OrderBillTo.Address1 = order.D_ADDRESS1;
+                OrderBillTo.Address2 = order.D_ADDRESS2;
+                OrderBillTo.City = order.D_CITY;
+                OrderBillTo.CompanyName = order.D_COMPANY;
+                OrderBillTo.Country = order.D_COUNTRY;
+                OrderBillTo.Email = order.D_EMAIL;
+                OrderBillTo.FirstName = order.D_FIRSTNAME;
+                OrderBillTo.LastName = order.D_LASTNAME;
+                OrderBillTo.Phone = order.D_PHONE;
+                OrderBillTo.PostalCode = order.D_ZIP;
+                OrderBillTo.State = order.D_STATE;
 
-            VCBusiness.VeraCoreOMS.OrderBillTo OrderBillTo = new VeraCoreOMS.OrderBillTo();
-            OrderBillTo.Address1 = order.D_ADDRESS1;
-            OrderBillTo.Address2 = order.D_ADDRESS2;
-            OrderBillTo.City = order.D_CITY;
-            OrderBillTo.CompanyName = order.D_COMPANY;
-            OrderBillTo.Country = order.D_COUNTRY;
-            OrderBillTo.Email = order.D_EMAIL;
-            OrderBillTo.FirstName = order.D_FIRSTNAME;
-            OrderBillTo.LastName = order.D_LASTNAME;
-            OrderBillTo.Phone = order.D_PHONE;
-            OrderBillTo.PostalCode = order.D_ZIP;
-            OrderBillTo.State = order.D_STATE;
-
-            Order.BillTo = OrderBillTo;
+                Order.BillTo = OrderBillTo;
+            }
 
 
             TOrder_Line_Item orderItem = orderline[0] as TOrder_Line_Item;
@@ -316,20 +318,30 @@ namespace VCBusiness
                 OrderShipTo.ThirdPartyAccountNumber = order.ShippingAccountNumber;
             }
 
-            //OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
-            //OrderShipTo.FreightCarrier.Name = orderItem.ShipCarrier;
-
-            //OrderShipTo.FreightService = new VCBusiness.VeraCoreOMS.FreightService();
-            //OrderShipTo.FreightService.Description = orderItem.ShipMethod;
-
-            
-
-
-
             if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["IsTestMode"].ToString()) == true)
             {
+                OrderShipTo.FreightService = new VCBusiness.VeraCoreOMS.FreightService();
                 OrderShipTo.FreightService.Description = "Standard";
+
+                OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
                 OrderShipTo.FreightCarrier.Name = "USPS";
+            }
+            else
+            {
+                //OrderShipTo.FreightCarrier = new VCBusiness.VeraCoreOMS.FreightCarrier();
+                //OrderShipTo.FreightCarrier.Name = orderItem.ShipCarrier;
+
+                //OrderShipTo.FreightService = new VCBusiness.VeraCoreOMS.FreightService();
+                //OrderShipTo.FreightService.Description = orderItem.ShipMethod;
+
+                ShippingOption ShippingOption = new ShippingOption();
+                ShippingOption.Description = orderItem.ShipMethod;
+
+                OrderShipping OrderShipping = new VeraCoreOMS.OrderShipping();
+                OrderShipping.ShippingOption = ShippingOption;
+
+                Order.Shipping = OrderShipping;
+
             }
 
             OrderShipTo.Key = "0";
@@ -347,15 +359,7 @@ namespace VCBusiness
             Order.Classification = new OrderClassification();
             Order.Classification.CampaignID = order.PartyCode;
 
-            ShippingOption ShippingOption = new ShippingOption();
-            ShippingOption.Description = orderItem.ShipMethod;
-            
-            
-            OrderShipping OrderShipping = new VeraCoreOMS.OrderShipping();
-            OrderShipping.ShippingOption = ShippingOption;
-
-            Order.Shipping = OrderShipping;
-
+          
             Order.Offers = new VCBusiness.VeraCoreOMS.OfferOrdered[orderline.Count];
 
             int i = 0;

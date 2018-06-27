@@ -44,7 +44,7 @@ namespace VCBusiness
             {
                 #region get order line
 
-                TOrder_Line_Item _tOrder_Line_Item = new TOrder_Line_Item();
+                Model.TOrder_Line_Item _tOrder_Line_Item = Common.CreateObject(this.Owner, "TOrder_Line_Item") as Model.TOrder_Line_Item;
                 _result = _tOrder_Line_Item.getOrderLineByOrderId(order.OrderId);
                 if (_result.Success == false)
                 {

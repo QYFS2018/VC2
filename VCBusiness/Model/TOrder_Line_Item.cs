@@ -549,7 +549,7 @@ namespace VCBusiness.Model
         }
         #endregion 
 
-        public  ReturnValue getOrderLineByOrderId(int id)
+        public virtual ReturnValue getOrderLineByOrderId(int id)
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderId"), id);
             ReturnValue _result = this.getEntityList(Usp_SQL);

@@ -26,7 +26,7 @@
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
 		</ClassType>
 	</Owner>
-  <Owner Name="Tecnifibre"  OwnerCode="00999" RegSubKey="Tecnifibre" Enable="true" >
+  <Owner Name="Tecnifibre"  OwnerCode="Tecnifibre" RegSubKey="Tecnifibre" Enable="true" >
     <OwnerInfo>
       <Info Key="VeraCoreUserName">danswebservice</Info>
       <Info Key="VeraCorePassword">ws#4DanLu</Info>
@@ -49,11 +49,43 @@
     <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.TecnifibreOrder" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderTF" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_Item" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProduct" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="EmailFactory" ClassType="VCBusiness.TecnifibreEmailFactory" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_EmailTF" AssemblyFile="VCBusiness.dll"/>
+    </ClassType>
+  </Owner>
+
+  <Owner Name="Nussentials"  OwnerCode="00999" RegSubKey="Nussentials" Enable="true" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">danswebservice</Info>
+      <Info Key="VeraCorePassword">ws#4DanLu</Info>
+      <Info Key="ShipConfirmation">Y</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="ImportDM">Y</Info>
+      <Info Key="ExpectedShipDate">Y</Info>
+      <Info Key="ProgramID">319</Info>
+      <Info Key="OrderType">REG</Info>
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="ProductDownload" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+      <Action Code="ImportDMOrderDetail" Enable="true"/>
+      <Action Code="ShipConfirmEmail" Enable="true"/>
+    </Actions>
+    <ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderNu" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_ItemNu" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_DetailNu" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
 </Owners>
