@@ -84,7 +84,7 @@
       <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_ItemNu" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_DetailNu" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
-      <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProduct" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProductNu" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="EmailFactory" ClassType="VCBusiness.NussentialsEmailFactory" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_EmailNu" AssemblyFile="VCBusiness.dll"/>
     </ClassType>

@@ -88,6 +88,7 @@
     <Compile Include="Model\TOrder_Line_ItemNu.cs" />
     <Compile Include="Model\TDM_Order_DetailNu.cs" />
     <Compile Include="Model\TProgram_EmailNu.cs" />
+    <Compile Include="Model\TProductNu.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OwnerOrder.cs" />
     <Compile Include="Process.cs" />

@@ -75,7 +75,7 @@ namespace VCBusiness
 
             #region get product list
 
-            TProduct _tProduct = new TProduct();
+            Model.TProduct _tProduct = Common.CreateObject(this.Owner, "TProduct") as Model.TProduct;
             _result = _tProduct.getProductList();
             if (_result.Success == false)
             {
