@@ -547,11 +547,35 @@ namespace VCBusiness.Model
                 return _discountAmount;
             }
         }
+
+        private string _trackingURL;
+        [BindingField("TrackingURL", true)]
+        public string TrackingURL
+        {
+            set
+            {
+                _trackingURL = value;
+            }
+            get
+            {
+                return _trackingURL;
+            }
+        }
+
+
+
         #endregion 
 
         public virtual ReturnValue getOrderLineByOrderId(int id)
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineByOrderId"), id);
+            ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
+
+        public virtual ReturnValue getOrdersDetail(int orderId)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrdersDetail"), orderId);
             ReturnValue _result = this.getEntityList(Usp_SQL);
             return _result;
         }

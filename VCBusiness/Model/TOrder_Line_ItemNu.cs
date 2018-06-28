@@ -13,7 +13,8 @@ namespace VCBusiness.Model
 
         }
 
-      
+
+   
 
         public  override ReturnValue getOrderLineByOrderId(int id)
         {
@@ -22,6 +23,12 @@ namespace VCBusiness.Model
             return _result;
         }
 
+        public override ReturnValue getOrdersDetail(int orderId)
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrdersDetailNU"), orderId);
+            ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
    
     }
 }

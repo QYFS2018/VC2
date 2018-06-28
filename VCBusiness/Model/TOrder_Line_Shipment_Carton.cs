@@ -368,5 +368,12 @@ namespace VCBusiness.Model
               ReturnValue _result = this.ExecSql(Usp_SQL, tran);
               return _result;
           }
+
+          public ReturnValue getOrderLineShipmentCartonByOrderID(int orderId, int release)
+          {
+              string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderLineShipmentCartonByOrderID"), orderId, release);
+              ReturnValue _result = this.getEntityList(Usp_SQL);
+              return _result;
+          }
      }
 }

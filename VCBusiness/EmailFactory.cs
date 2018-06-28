@@ -700,9 +700,279 @@ namespace VCBusiness
 
             return _result;
         }
+    }
 
-        
+
+    public class NussentialsEmailFactory : EmailFactory
+    {
+        public override ReturnValue GetMailContent(int orderId, int releaseID, TProgram_Email mi)
+        {
+            ReturnValue _result = new ReturnValue();
+
+            System.Globalization.NumberFormatInfo nfi = Utilities.CurrentNumberFormat;
 
 
+            #region getOrderInfo and Check
+
+            TOrderNu _tOrder = new TOrderNu();
+            _result = _tOrder.getOrderById(orderId);
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+
+            _tOrder = _result.Object as TOrderNu;
+
+
+            if (_tOrder.OrderId == 0)
+            {
+
+                _result.Success = false;
+                _result.ErrMessage = "the order doesn't exits";
+
+                return _result;
+            }
+
+            TOrderNu _emailAddress = new TOrderNu();
+            _result = _emailAddress.getMailAddress(_tOrder.CustomerId);
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+
+            _emailAddress = _result.Object as TOrderNu;
+
+
+
+
+            TOrder_Line_ItemNu _tOrdersDetail = new TOrder_Line_ItemNu();
+            _result = _tOrdersDetail.getOrdersDetail(orderId);
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+
+            EntityList _orderDetails = _result.ObjectList;
+
+
+            if (_orderDetails.Count == 0)
+            {
+
+                _result.Success = false;
+                _result.ErrMessage = "the order doesn't exits";
+
+                return _result;
+            }
+
+
+            #endregion
+
+            try
+            {
+                #region setup EmailMessage
+
+                EmailMessage _mail = new EmailMessage();
+
+                if (_emailAddress.MailBCC.IndexOf(";") > 0) _emailAddress.MailBCC = _emailAddress.MailBCC.Remove(_emailAddress.MailBCC.Length - 1, 1);
+
+                if (_emailAddress.MailCC.IndexOf(";") > 0) _emailAddress.MailCC = _emailAddress.MailCC.Remove(_emailAddress.MailCC.Length - 1, 1);
+
+                if (_emailAddress.MailTo.IndexOf(";") > 0) _emailAddress.MailTo = _emailAddress.MailTo.Remove(_emailAddress.MailTo.Length - 1, 1);
+
+                mi.BccAddress = _emailAddress.MailBCC;
+                mi.CCAddress = _emailAddress.MailCC;
+
+            
+
+                #region Order Summary
+                string MailContent = mi.FullText
+                    .Replace("&Firstname", _tOrder.FirstName)
+                    .Replace("&zorderid", _tOrder.OrderId.ToString())
+                    .Replace("&OrderDate", _tOrder.OrderDate.ToString("MM/dd/yyyy"))
+                     .Replace("&ztotalproductamount", _tOrder.TotalProductAmount.ToString("C", nfi))
+                    .Replace("&zTotalShipping", (_tOrder.TotalShipping ).ToString("C", nfi))
+                .Replace("&zTotalTax", _tOrder.TotalTax.ToString("C", nfi))
+                .Replace("&zTotalOrderAmount", _tOrder.TotalOrderAmount.ToString("C", nfi))
+                 .Replace("&ShippingMethod", _tOrder.ShipMethod)
+                    .Replace("&ShippedDate", _tOrder.ShippedDate.Value.ToString("MM/dd/yyyy"));
+
+                #endregion
+
+                #region Order Detail
+                string RepeatTemp = "";
+
+                if (MailContent.IndexOf("&orderinfo") > 0)
+                {
+                    RepeatTemp = " <table width =\"100%\" cellpadding=\"1\"><tr><td >Item No</td><td>Description</td><td >Unit Price</td><td>Quantity</td></tr>";
+
+                    foreach (TOrder_Line_ItemNu drItem in _orderDetails)
+                    {
+                        RepeatTemp = RepeatTemp + "<tr><td >" + drItem.PartNumber + "</td><td>" + drItem.ProductName
+                            + "</td><td >" + drItem.Price.ToString("C") + "</td><td>" + drItem.Quantity.ToString() + "</td></tr>";
+                    }
+                    RepeatTemp = RepeatTemp + "</TABLE>";
+                }
+
+                MailContent = MailContent.Replace("&orderinfo", RepeatTemp);
+                #endregion
+
+                #region Shipping Detail
+
+                RepeatTemp = "";
+
+                if (MailContent.IndexOf("&shipmentnfo") > 0)
+                {
+                    RepeatTemp = " <table  width =\"100%\" cellpadding=\"1\">";
+
+                    int _packageNumber = 1;
+
+                    TOrder_Line_Shipment_Carton _tOrder_Line_Shipment_Carton = new TOrder_Line_Shipment_Carton();
+                    _result = _tOrder_Line_Shipment_Carton.getOrderLineShipmentCartonByOrderID(orderId, releaseID);
+                    if (_result.Success == false)
+                    {
+                        return _result;
+                    }
+
+                    EntityList cartonList = _result.ObjectList;
+
+
+
+                    TOrder_Line_Shipment_ASN _tOrder_Line_Shipment_ASN = new TOrder_Line_Shipment_ASN();
+                    _result = _tOrder_Line_Shipment_ASN.getOrderLineShipmentASNByOrderID(orderId, releaseID);
+                    if (_result.Success == false)
+                    {
+                        return _result;
+                    }
+
+                    EntityList asnList = _result.ObjectList;
+
+
+
+                    foreach (TOrder_Line_Shipment_Carton _carton in cartonList)
+                    {
+                        if (asnList.Count != 0)
+                        {
+
+                            if (string.IsNullOrEmpty(_carton.PACKAGE_TRACE_ID) == false)
+                            {
+                                RepeatTemp = RepeatTemp + "<tr><td >Package " + _packageNumber.ToString() + "  Tracking Number:" + _carton.PACKAGE_TRACE_ID + "  " +
+                                    "(<a href=\"{0}\">TrackOrder</a>)" + "</td></tr>";
+                            }
+                            else
+                            {
+                                RepeatTemp = RepeatTemp + "<tr><td >Package " + _packageNumber.ToString() + "  Tracking Number:N/A</td></tr>";
+                            }
+
+                            RepeatTemp = RepeatTemp + "<tr><td ><br /> <table width =\"100%\" cellpadding=\"1\"><tr><td > Item No</td>" +
+                                "<td>Description</td><td>Qty in Package</td></tr>";
+                            foreach (TOrder_Line_Shipment_ASN _asn in asnList)
+                            {
+                                TOrder_Line_ItemNu _orderDetail = this.getOrderLine(_orderDetails, _asn);
+                                RepeatTemp = RepeatTemp + " <tr><td >" + _orderDetail.PartNumber + "</td><td>" + _orderDetail.ProductName +
+                                    "</td><td>" + Convert.ToInt16(Convert.ToDouble(_asn.PIECES_TO_MOVE)).ToString() + "</td></tr>";
+                                RepeatTemp = RepeatTemp.Replace("{0}", _orderDetail.TrackingURL + _carton.PACKAGE_TRACE_ID);
+                            }
+
+                            RepeatTemp = RepeatTemp + "</table><br /></td></tr>";
+
+                            _packageNumber++;
+                        }
+                    }
+
+
+                    RepeatTemp = RepeatTemp + "</TABLE>";
+                }
+
+                MailContent = MailContent.Replace("&shipmentnfo", RepeatTemp);
+
+                #endregion
+
+
+                _mail.HtmlPart = new HtmlAttachment(MailContent);
+
+
+
+                _mail.FromAddress = new EmailAddress(mi.RespondTo);
+                _mail.Subject = mi.Subject;
+
+                if (Common.IsTest == true)
+                {
+                    string[] maillist = Common.TestMailTo.Split(';');
+                    foreach (string _item in maillist)
+                    {
+                        _mail.AddToAddress(new EmailAddress(_item));
+
+                    }
+
+                    _result.Table = Common.TestMailTo;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(_emailAddress.MailTo) == true)
+                    {
+                        _result.Success = false;
+                        _result.ErrMessage = "Email To Address is empty";
+                        return _result;
+                    }
+                    else
+                    {
+                        string[] bcclist = _emailAddress.MailTo.Split(';');
+                        foreach (string _item in bcclist)
+                        {
+                            _mail.AddToAddress(new EmailAddress(_item));
+                        }
+                    }
+
+                    _result.Table = _emailAddress.MailTo;
+                }
+
+
+                if (string.IsNullOrEmpty(mi.BccAddress) == false)
+                {
+                    string[] bcclist = mi.BccAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        _mail.AddBccAddress(new EmailAddress(_item));
+                    }
+                }
+                if (string.IsNullOrEmpty(mi.CCAddress) == false)
+                {
+                    string[] bcclist = mi.CCAddress.Split(';');
+                    foreach (string _item in bcclist)
+                    {
+                        _mail.AddCcAddress(new EmailAddress(_item));
+                    }
+                }
+
+
+                _result.ObjectValue = _mail;
+
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                _result.Success = false;
+                _result.ErrMessage = ex.ToString();
+            }
+
+            return _result;
+        }
+
+        protected TOrder_Line_ItemNu getOrderLine(EntityList _orderDetails, TOrder_Line_Shipment_ASN _asn)
+        {
+            TOrder_Line_ItemNu _result = new TOrder_Line_ItemNu();
+
+            foreach (TOrder_Line_ItemNu _item in _orderDetails)
+            {
+                if (_item.OrderId == _asn.ORDER_ID && _item.LineNum == Convert.ToInt32(Convert.ToDouble(_asn.ORDER_LINE)))
+                {
+                    _result = _item;
+                    break;
+                }
+            }
+
+            return _result;
+        }
     }
 }

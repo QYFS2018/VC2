@@ -957,6 +957,20 @@ namespace VCBusiness.Model
             }
         }
 
+        private int _customerId;
+        [BindingField("CustomerId", true)]
+        public int CustomerId
+        {
+            set
+            {
+                _customerId = value;
+            }
+            get
+            {
+                return _customerId;
+            }
+        }
+
         #endregion 
 
         public virtual ReturnValue getOrderById(int id)
