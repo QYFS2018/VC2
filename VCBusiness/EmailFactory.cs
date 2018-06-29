@@ -686,6 +686,7 @@ namespace VCBusiness
             _app_Log_Mail.CreatedOn = System.DateTime.Now;
             _app_Log_Mail.AddressFrom = _tProgram_Email.RespondTo;
             _app_Log_Mail.AddressTo = _emailTo;
+            _app_Log_Mail.AddressBcc = _tProgram_Email.BccAddress;
             _app_Log_Mail.Subject = _tProgram_Email.Subject;
             _app_Log_Mail.Content = MailContent;
 
