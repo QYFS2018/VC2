@@ -121,5 +121,12 @@ namespace VCTransfer
 
             Process("GenerateInvoicePDF");
         }
+
+        private void InvoiceEmail_Click(object sender, EventArgs e)
+        {
+            if (!confirm("InvoiceEmail")) return;
+
+            Process("InvoiceEmail");
+        }
     }
 }

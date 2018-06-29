@@ -38,11 +38,18 @@
             this.cb_Owner = new System.Windows.Forms.ComboBox();
             this.ImportDMOrderDetail = new System.Windows.Forms.Button();
             this.GenerateInvoicePDF = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.InvoiceEmail = new System.Windows.Forms.Button();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // OrderDownload
             // 
-            this.OrderDownload.Location = new System.Drawing.Point(51, 102);
+            this.OrderDownload.Location = new System.Drawing.Point(67, 24);
             this.OrderDownload.Name = "OrderDownload";
             this.OrderDownload.Size = new System.Drawing.Size(128, 57);
             this.OrderDownload.TabIndex = 0;
@@ -53,7 +60,7 @@
             // ShipmentUpdate
             // 
             this.ShipmentUpdate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ShipmentUpdate.Location = new System.Drawing.Point(208, 102);
+            this.ShipmentUpdate.Location = new System.Drawing.Point(224, 24);
             this.ShipmentUpdate.Name = "ShipmentUpdate";
             this.ShipmentUpdate.Size = new System.Drawing.Size(128, 57);
             this.ShipmentUpdate.TabIndex = 1;
@@ -63,7 +70,7 @@
             // 
             // InventoryUpdate
             // 
-            this.InventoryUpdate.Location = new System.Drawing.Point(208, 181);
+            this.InventoryUpdate.Location = new System.Drawing.Point(224, 103);
             this.InventoryUpdate.Name = "InventoryUpdate";
             this.InventoryUpdate.Size = new System.Drawing.Size(128, 57);
             this.InventoryUpdate.TabIndex = 2;
@@ -73,7 +80,7 @@
             // 
             // ProductDownload
             // 
-            this.ProductDownload.Location = new System.Drawing.Point(51, 181);
+            this.ProductDownload.Location = new System.Drawing.Point(67, 103);
             this.ProductDownload.Name = "ProductDownload";
             this.ProductDownload.Size = new System.Drawing.Size(128, 57);
             this.ProductDownload.TabIndex = 3;
@@ -83,7 +90,7 @@
             // 
             // ShipConfirmEmail
             // 
-            this.ShipConfirmEmail.Location = new System.Drawing.Point(358, 265);
+            this.ShipConfirmEmail.Location = new System.Drawing.Point(290, 47);
             this.ShipConfirmEmail.Name = "ShipConfirmEmail";
             this.ShipConfirmEmail.Size = new System.Drawing.Size(128, 57);
             this.ShipConfirmEmail.TabIndex = 4;
@@ -93,7 +100,7 @@
             // 
             // OID
             // 
-            this.OID.Location = new System.Drawing.Point(51, 265);
+            this.OID.Location = new System.Drawing.Point(22, 15);
             this.OID.Name = "OID";
             this.OID.Size = new System.Drawing.Size(285, 21);
             this.OID.TabIndex = 5;
@@ -118,7 +125,7 @@
             // 
             // ImportDMOrderDetail
             // 
-            this.ImportDMOrderDetail.Location = new System.Drawing.Point(358, 192);
+            this.ImportDMOrderDetail.Location = new System.Drawing.Point(156, 47);
             this.ImportDMOrderDetail.Name = "ImportDMOrderDetail";
             this.ImportDMOrderDetail.Size = new System.Drawing.Size(128, 57);
             this.ImportDMOrderDetail.TabIndex = 12;
@@ -128,7 +135,7 @@
             // 
             // GenerateInvoicePDF
             // 
-            this.GenerateInvoicePDF.Location = new System.Drawing.Point(358, 119);
+            this.GenerateInvoicePDF.Location = new System.Drawing.Point(22, 47);
             this.GenerateInvoicePDF.Name = "GenerateInvoicePDF";
             this.GenerateInvoicePDF.Size = new System.Drawing.Size(128, 57);
             this.GenerateInvoicePDF.TabIndex = 13;
@@ -136,26 +143,72 @@
             this.GenerateInvoicePDF.UseVisualStyleBackColor = true;
             this.GenerateInvoicePDF.Click += new System.EventHandler(this.GenerateInvoicePDF_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(47, 60);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(468, 230);
+            this.tabControl1.TabIndex = 14;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.InventoryUpdate);
+            this.tabPage1.Controls.Add(this.OrderDownload);
+            this.tabPage1.Controls.Add(this.ShipmentUpdate);
+            this.tabPage1.Controls.Add(this.ProductDownload);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(460, 204);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Common";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.InvoiceEmail);
+            this.tabPage2.Controls.Add(this.OID);
+            this.tabPage2.Controls.Add(this.ImportDMOrderDetail);
+            this.tabPage2.Controls.Add(this.GenerateInvoicePDF);
+            this.tabPage2.Controls.Add(this.ShipConfirmEmail);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(460, 204);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Other";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // InvoiceEmail
+            // 
+            this.InvoiceEmail.Location = new System.Drawing.Point(22, 110);
+            this.InvoiceEmail.Name = "InvoiceEmail";
+            this.InvoiceEmail.Size = new System.Drawing.Size(128, 57);
+            this.InvoiceEmail.TabIndex = 14;
+            this.InvoiceEmail.Text = "Invoice Email";
+            this.InvoiceEmail.UseVisualStyleBackColor = true;
+            this.InvoiceEmail.Click += new System.EventHandler(this.InvoiceEmail_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 350);
-            this.Controls.Add(this.GenerateInvoicePDF);
-            this.Controls.Add(this.ImportDMOrderDetail);
+            this.ClientSize = new System.Drawing.Size(563, 323);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cb_Owner);
-            this.Controls.Add(this.OID);
-            this.Controls.Add(this.ShipConfirmEmail);
-            this.Controls.Add(this.ProductDownload);
-            this.Controls.Add(this.InventoryUpdate);
-            this.Controls.Add(this.ShipmentUpdate);
-            this.Controls.Add(this.OrderDownload);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VeraCore Transfer";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +226,10 @@
         private System.Windows.Forms.ComboBox cb_Owner;
         private System.Windows.Forms.Button ImportDMOrderDetail;
         private System.Windows.Forms.Button GenerateInvoicePDF;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button InvoiceEmail;
     }
 }
 

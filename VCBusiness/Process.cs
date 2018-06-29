@@ -125,6 +125,15 @@ namespace VCBusiness
                         VCBusiness.TecnifibreInvoicePDF TecnifibreInvoicePDF = new TecnifibreInvoicePDF();
                         _result = TecnifibreInvoicePDF.PrintInvoice(int.Parse(oid));
                     }
+
+                    if (action.ToUpper() == "InvoiceEmail".ToUpper())
+                    {
+                        VCBusiness.TecnifibreEmailFactory EmailFactory = new TecnifibreEmailFactory();
+                        _result = EmailFactory.SentInvoiceEmail(int.Parse(oid));
+                      
+                    }
+
+
                     #endregion
 
                     if (_result.Success == false)
