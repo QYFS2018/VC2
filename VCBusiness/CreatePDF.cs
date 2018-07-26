@@ -142,7 +142,7 @@ namespace VCBusiness
 
 
                 PdfPTable _PdfPTable = new PdfPTable(2);
-                iTextSharp.text.Image _Image = iTextSharp.text.Image.GetInstance(new Uri(_path + "\\Images\\tf-logo-pdf.JPG"));
+                iTextSharp.text.Image _Image = iTextSharp.text.Image.GetInstance(new Uri(_path + "\\Images\\tflogo.JPG"));
                 _Image.ScalePercent(11.0f);
                 PdfPCell _PdfPCell = new PdfPCell(_Image);
                 _PdfPCell.BorderWidth = 0.0f;

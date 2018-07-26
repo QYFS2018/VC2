@@ -357,6 +357,11 @@ namespace VCBusiness.Model
             return _result;
         }
 
-    
+        public ReturnValue getReInvoiceEmailList()
+        {
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getReInvoiceEmailList"));
+            ReturnValue _result = this.getEntityList(Usp_SQL);
+            return _result;
+        }
      }
 }

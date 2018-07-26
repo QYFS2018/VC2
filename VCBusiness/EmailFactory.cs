@@ -567,7 +567,7 @@ namespace VCBusiness
                 _mail.FromAddress = new EmailAddress(_tProgram_Email.RespondTo);
                 _mail.Subject = _tProgram_Email.Subject;
 
-
+                
 
                 #endregion
 
@@ -669,7 +669,18 @@ namespace VCBusiness
 
                 #endregion
 
-              
+                DotNetOpenMail.SmtpAuth.SmtpAuthToken token = new DotNetOpenMail.SmtpAuth.SmtpAuthToken(
+                    System.Configuration.ConfigurationSettings.AppSettings["SMTPUserName"],
+                    System.Configuration.ConfigurationSettings.AppSettings["SMTPPassword"]);
+                
+
+                SmtpServer server = new SmtpServer(System.Configuration.ConfigurationSettings.AppSettings["SMTPServer"]);
+                server.SmtpAuthToken = token;
+
+                if (_mail.Send(server) == false)
+                {
+                    _result.Success = false;
+                }
 
             }
             catch (Exception ex)
@@ -698,6 +709,37 @@ namespace VCBusiness
 
             #endregion
 
+
+            return _result;
+        }
+
+        public ReturnValue ReSentInvoiceEmail()
+        {
+            ReturnValue _result = new ReturnValue();
+
+            TInvoice _tInvoice = new TInvoice();
+            _result = _tInvoice.getReInvoiceEmailList();
+            if (_result.Success == false)
+            {
+                return _result;
+            }
+
+            EntityList list = _result.ObjectList;
+
+
+            foreach (TInvoice item in list)
+            {
+                _result = SentInvoiceEmail(item.InvoiceId);
+
+                if (_result.Success == false)
+                {
+                    Common.Log("Invoice : " + item.InvoiceId + "---ER \r\n" + _result.ErrMessage);
+                }
+                else
+                {
+                    Common.Log("Invoice : " + item.InvoiceId + "---OK");
+                }
+            }
 
             return _result;
         }

@@ -129,7 +129,7 @@ namespace VCBusiness
                     if (action.ToUpper() == "InvoiceEmail".ToUpper())
                     {
                         VCBusiness.TecnifibreEmailFactory EmailFactory = new TecnifibreEmailFactory();
-                        _result = EmailFactory.SentInvoiceEmail(int.Parse(oid));
+                        _result = EmailFactory.ReSentInvoiceEmail();
                       
                     }
 
