@@ -260,4 +260,61 @@ namespace VCBusiness
             return _result;
         }
     }
+
+    public class DermisVitamins : Order
+    {
+        protected override ReturnValue customerEventPreOrderDownload(TOrder order, EntityList orderline)
+        {
+            ReturnValue _result = new ReturnValue();
+
+
+            string shipMethod = ((TOrder_Line_Item)orderline[0]).ShipMethod;
+
+            if (shipMethod == "FEH" || shipMethod == "FE2" || shipMethod == "FEP" || shipMethod == "FE3" 
+                || shipMethod == "FES" || shipMethod == "FEG" || shipMethod == "FSP")
+            {
+                order.ShippingAccountNumber = this.Owner.OwnerInfo["ShippingAccountNumber"].ToString();
+            }
+            else
+            {
+                order.ShippingAccountNumber = "";
+            }
+
+
+
+            return _result;
+        }
+
+    }
+
+    public class Snoopguard : Order
+    {
+        protected override ReturnValue customerEventPreOrderDownload(TOrder order, EntityList orderline)
+        {
+            ReturnValue _result = new ReturnValue();
+
+
+            string shipMethod = ((TOrder_Line_Item)orderline[0]).ShipMethod;
+
+
+
+            if (shipMethod == "FE2" || shipMethod == "FEP" || shipMethod == "FE3" || shipMethod == "FES" || shipMethod == "FEG" || shipMethod == "FSP")
+            {
+                order.ShippingAccountNumber = this.Owner.OwnerInfo["ShippingAccountNumber"].ToString();
+                
+            }
+            else
+            {
+                order.ShippingAccountNumber = "";
+            }
+
+            if (order.OrderType != "MAIL-00462" && order.OrderType != "IPC-00462")
+            {
+                order.OrderType = "REG";
+            }
+
+            return _result;
+        }
+
+    }
 }

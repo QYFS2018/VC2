@@ -23,7 +23,7 @@ namespace VCBusiness
             #region get order list
 
             Model.TOrder _tOrder = Common.CreateObject(this.Owner, "TOrder") as Model.TOrder;
-            _result = _tOrder.getDownloadOrderList();
+            _result = _tOrder.getDownloadOrderList( int.Parse(Owner.OwnerInfo["ProgramID"].ToString()));
             if (_result.Success == false)
             {
                 _result.Success = false;

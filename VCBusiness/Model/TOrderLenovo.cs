@@ -6,7 +6,7 @@ namespace VCBusiness.Model
 {
     [Serializable]
     [BindingClass("Order")]
-    public class TOrderNu : TOrder
+    public class TOrderLenovo : TOrder
     {
 
 
@@ -53,30 +53,17 @@ namespace VCBusiness.Model
         }
 
 
-        public TOrderNu()
+        public TOrderLenovo()
         {
 
         }
 
         public override ReturnValue getDownloadOrderList(int programID)
         {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderDownNU"));
+            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderDownLenovo"));
             ReturnValue _result = this.getEntityList(Usp_SQL);
             return _result;
         }
-
-        public override ReturnValue getOrderById(int id)
-        {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getOrderByIdNU"), id);
-            ReturnValue _result = this.getEntity(Usp_SQL);
-            return _result;
-        }
-
-        public ReturnValue getMailAddress(int customerId)
-        {
-            string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getMailAddress"), customerId);
-            ReturnValue _result = this.getEntity(Usp_SQL);
-            return _result;
-        }
+    
     }
 }

@@ -980,7 +980,7 @@ namespace VCBusiness.Model
             return _result;
         }
 
-        public virtual ReturnValue getDownloadOrderList()
+        public virtual ReturnValue getDownloadOrderList(int programID)
         {
             string Usp_SQL = String.Format(WComm.SqlDefine.getSQL("getDownloadOrderList"));
             ReturnValue _result = this.getEntityList(Usp_SQL);

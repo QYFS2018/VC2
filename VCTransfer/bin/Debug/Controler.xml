@@ -1,31 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Owners>
-	<Owner Name="FIBI"  OwnerCode="FIBICL" RegSubKey="FIBI" Enable="true" >
-		<OwnerInfo>
-			<Info Key="VeraCoreUserName">FIBI_ORD</Info>
-			<Info Key="VeraCorePassword">HfFR9n!n</Info>
-			<Info Key="ShipConfirmation">Y</Info>
-			<Info Key="ProductClass">HARD GOODS</Info>
-			<Info Key="LogSuccessAction">Y</Info>
-			<Info Key="ImportDM">N</Info>
-			<Info Key="ExpectedShipDate">N</Info>
+  <Owner Name="FIBI"  OwnerCode="FIBICL" RegSubKey="FIBI" Enable="true" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">FIBI_ORD</Info>
+      <Info Key="VeraCorePassword">HfFR9n!n</Info>
+      <Info Key="ShipConfirmation">Y</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="ImportDM">N</Info>
+      <Info Key="ExpectedShipDate">N</Info>
       <Info Key="ProgramID">433</Info>
       <Info Key="OrderType">REG</Info>
       <Info Key="FreightService">Standard</Info>
-		</OwnerInfo>
-		<Actions>
-			<Action Code="OrderDownload" Enable="true"/>
-			<Action Code="UpdateShipment" Enable="true"/>
-			<Action Code="UpdateInventoryStatus" Enable="true"/>
-		</Actions>
-		<ClassType>
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+    </Actions>
+    <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrder" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_Item" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
-		</ClassType>
-	</Owner>
+    </ClassType>
+  </Owner>
   <Owner Name="Tecnifibre"  OwnerCode="Tecnifibre" RegSubKey="Tecnifibre" Enable="true" >
     <OwnerInfo>
       <Info Key="VeraCoreUserName">danswebservice</Info>
@@ -58,7 +60,6 @@
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_EmailTF" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
-
   <Owner Name="Nussentials"  OwnerCode="00999" RegSubKey="Nussentials" Enable="true" >
     <OwnerInfo>
       <Info Key="VeraCoreUserName">danswebservice</Info>
@@ -90,4 +91,122 @@
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_EmailNu" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
+
+
+
+  <Owner Name="Lenovo Warranty"  OwnerCode="00015" RegSubKey="smq01/ZstoreV3_Lenovo" Enable="True" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">danswebservice</Info>
+      <Info Key="VeraCorePassword">ws#4DanLu</Info>
+      <Info Key="ShipConfirmation">Y</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="ImportDM">Y</Info>
+      <Info Key="ExpectedShipDate">Y</Info>
+      <Info Key="ProgramID">383</Info>
+      <Info Key="OrderType">REG</Info>
+      <Info Key="SentHPITNEmail">Y</Info>
+
+      <Info Key="HPITNEmailContent">
+        Good afternoon MNAT CSR,
+        Please provide an ITN number for the proscribed country on the attached invoice at your earliest convenience.
+
+        Regards, HP PCC Support Team
+      </Info>
+      <Info Key="HPITNEmailFromAddress">pccsupport@hpordercenter.com</Info>
+      <Info Key="HPITNEmailToAddress">Exdoc-Roseville-Contacts@external.groups.hp.com</Info>
+      <Info Key="HPITNEmailCCAddress">Isaac.Gutierrez@zoyto.com;Daniel.Schopper@zoyto.com;omssupport@zoyto.com</Info>
+      <Info Key="HPITNEmailBCCAddress">Danl@zoyto.com;dongmei.wu@zoyto.com</Info>
+      <Info Key="HPITNEmailSubject">ZOYTO- ITN Request-[%OrderNumber]</Info>
+      <Info Key="RMAReason">DefectiveProduct</Info>
+      <Info Key="DefaultPartNumber">999</Info>
+
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="ProductDownload" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+      <Action Code="ImportDMOrderDetail" Enable="true"/>
+      <Action Code="ShipConfirmEmail" Enable="true"/>
+      <Action Code="SentHPInvoice" Enable="false"/>
+    </Actions>
+    <ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderLenovo" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_Item" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_DetailLenovo" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProduct" ClassType="VCBusiness.Model.TProduct" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
+    </ClassType>
+  </Owner>
+
+  <Owner Name="DermisVitamins"  OwnerCode="00469" RegSubKey="smq01/ClamCase" Enable="true" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">FIBI_ORD</Info>
+      <Info Key="VeraCorePassword">HfFR9n!n</Info>
+      <Info Key="ShipConfirmation">Y</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="ImportDM">N</Info>
+      <Info Key="ProgramID">469</Info>
+      <Info Key="OrderType">REG</Info>
+      <Info Key="FreightService">Standard</Info>
+
+      <Info Key="ShipConfirmation">N</Info>
+      <Info Key="ExpectedShipDate">N</Info>
+      <Info Key="Shipping3rdParty">Y</Info>
+      <Info Key="ShippingAccountNumber">299099750</Info>
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+      <Action Code="ImportDMOrderDetail" Enable="true"/>
+      <Action Code="ShipConfirmEmail" Enable="true"/>
+    </Actions>
+    <ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderFullfillment" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_ItemFullfillment" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
+    </ClassType>
+   
+  </Owner>
+
+  <Owner Name="Snoopguard"  OwnerCode="00463" RegSubKey="smq01/ClamCase" Enable="true" >
+    <OwnerInfo>
+      <Info Key="VeraCoreUserName">FIBI_ORD</Info>
+      <Info Key="VeraCorePassword">HfFR9n!n</Info>
+      <Info Key="ShipConfirmation">N</Info>
+      <Info Key="ProductClass">HARD GOODS</Info>
+      <Info Key="LogSuccessAction">Y</Info>
+      <Info Key="ImportDM">N</Info>
+      <Info Key="ExpectedShipDate">N</Info>
+      <Info Key="ProgramID">463</Info>
+      <Info Key="OrderType">REG</Info>
+      <Info Key="FreightService">Standard</Info>
+      <Info Key="ShippingAccountNumber">600152548</Info>
+    </OwnerInfo>
+    <Actions>
+      <Action Code="OrderDownload" Enable="true"/>
+      <Action Code="UpdateShipment" Enable="true"/>
+      <Action Code="UpdateInventoryStatus" Enable="true"/>
+    </Actions>
+    <ClassType>
+      <Class ClassCode="Order" ClassType="VCBusiness.Order" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder" ClassType="VCBusiness.Model.TOrderFullfillment" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TOrder_Line_Item" ClassType="VCBusiness.Model.TOrder_Line_ItemFullfillment" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TDM_Order_Detail" ClassType="VCBusiness.Model.TDM_Order_Detail" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="Product" ClassType="VCBusiness.Product" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="EmailFactory" ClassType="VCBusiness.EmailFactory" AssemblyFile="VCBusiness.dll"/>
+      <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_Email" AssemblyFile="VCBusiness.dll"/>
+    </ClassType>
+  </Owner>
+
 </Owners>
