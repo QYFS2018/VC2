@@ -60,14 +60,14 @@
       <Class ClassCode="TProgram_Email" ClassType="VCBusiness.Model.TProgram_EmailTF" AssemblyFile="VCBusiness.dll"/>
     </ClassType>
   </Owner>
-  <Owner Name="Nussentials"  OwnerCode="00999" RegSubKey="Nussentials" Enable="true" >
+  <Owner Name="Nussentials"  OwnerCode="NUSSOM" RegSubKey="Nussentials" Enable="true" >
     <OwnerInfo>
-      <Info Key="VeraCoreUserName">danswebservice</Info>
-      <Info Key="VeraCorePassword">ws#4DanLu</Info>
+      <Info Key="VeraCoreUserName">NUSS_ORD</Info>
+      <Info Key="VeraCorePassword">	8i!gp9bC</Info>
       <Info Key="ShipConfirmation">Y</Info>
       <Info Key="ProductClass">HARD GOODS</Info>
       <Info Key="LogSuccessAction">Y</Info>
-      <Info Key="ImportDM">Y</Info>
+      <Info Key="ImportDM">N</Info>
       <Info Key="ExpectedShipDate">Y</Info>
       <Info Key="ProgramID">319</Info>
       <Info Key="OrderType">REG</Info>

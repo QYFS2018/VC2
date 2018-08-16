@@ -68,13 +68,6 @@ namespace VCTransfer
 
         private void Process(string action)
         {
-            if (System.Environment.MachineName.ToLower() != System.Configuration.ConfigurationSettings.AppSettings["MachineName"].ToString().ToLower())
-            {
-                MessageBox.Show("Can't run on " + System.Environment.MachineName);
-
-                return;
-            }
-     
             ReturnValue _result = new ReturnValue();
 
             string[] _cbValue = this.cb_Owner.SelectedItem.ToString().Split('-');
