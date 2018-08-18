@@ -133,6 +133,37 @@ namespace VCBusiness
                       
                     }
 
+                    #region Tecnifibre
+
+                    Tecnifibre Tecnifibre = new Tecnifibre();
+
+                    if (action.ToUpper() == "TFDueInvoices".ToUpper())
+                    {
+                        Common.Log("Start TFDueInvoices");
+                        _result = Tecnifibre.DueInvoices();
+                    }
+
+                    if (action.ToUpper() == "TFPastDue".ToUpper())
+                    {
+                        Common.Log("Start TFPastDue");
+                        _result = Tecnifibre.PastDue();
+                    }
+
+                    if (action.ToUpper() == "TFCancelOrder".ToUpper())
+                    {
+                        Common.Log("Start TFCancelOrder");
+                        _result = Tecnifibre.CancelHDOrder();
+                    }
+
+                    if (action.ToUpper() == "TFWishList".ToUpper())
+                    {
+                        Common.Log("Start TFWishList");
+                        _result = Tecnifibre.WishList();
+                    }
+
+
+                    #endregion
+
 
                     #endregion
 

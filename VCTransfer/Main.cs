@@ -121,5 +121,26 @@ namespace VCTransfer
 
             Process("InvoiceEmail");
         }
+
+        private void TFDueInvoices_Click(object sender, EventArgs e)
+        {
+            if (!confirm("Due Invoices")) return;
+
+            Process("TFDueInvoices");
+        }
+
+        private void TFPastDue_Click(object sender, EventArgs e)
+        {
+            if (!confirm("Past Due")) return;
+
+            Process("TFPastDue");
+        }
+
+        private void TFWishList_Click(object sender, EventArgs e)
+        {
+            if (!confirm("Wish List")) return;
+
+            Process("TFWishList");
+        }
     }
 }

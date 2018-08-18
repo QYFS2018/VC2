@@ -93,6 +93,8 @@
     <Compile Include="Model\TDM_Order_DetailLenovo.cs" />
     <Compile Include="Model\TOrderFullfillment.cs" />
     <Compile Include="Model\TOrder_Line_ItemFullfillment.cs" />
+    <Compile Include="Model\TWishList.cs" />
+    <Compile Include="Model\TWishList_Line_Item.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OwnerOrder.cs" />
     <Compile Include="Process.cs" />
@@ -103,6 +105,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Tecnifibre.cs" />
     <Compile Include="VeraCore.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

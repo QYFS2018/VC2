@@ -48,6 +48,9 @@
       <Action Code="ImportDMOrderDetail" Enable="true"/>
       <Action Code="ShipConfirmEmail" Enable="true"/>
       <Action Code="InvoiceEmail" Enable="true"/>
+      <Action Code="TFDueInvoices" Enable="true"/>
+      <Action Code="TFPastDue" Enable="true"/>
+      <Action Code="TFWishList" Enable="true"/>
     </Actions>
     <ClassType>
       <Class ClassCode="Order" ClassType="VCBusiness.TecnifibreOrder" AssemblyFile="VCBusiness.dll"/>

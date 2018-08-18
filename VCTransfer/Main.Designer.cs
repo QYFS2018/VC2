@@ -42,6 +42,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.InvoiceEmail = new System.Windows.Forms.Button();
+            this.TFDueInvoices = new System.Windows.Forms.Button();
+            this.TFPastDue = new System.Windows.Forms.Button();
+            this.TFWishList = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -150,7 +153,7 @@
             this.tabControl1.Location = new System.Drawing.Point(47, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(468, 230);
+            this.tabControl1.Size = new System.Drawing.Size(516, 339);
             this.tabControl1.TabIndex = 14;
             // 
             // tabPage1
@@ -169,6 +172,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.TFWishList);
+            this.tabPage2.Controls.Add(this.TFPastDue);
+            this.tabPage2.Controls.Add(this.TFDueInvoices);
             this.tabPage2.Controls.Add(this.InvoiceEmail);
             this.tabPage2.Controls.Add(this.OID);
             this.tabPage2.Controls.Add(this.ImportDMOrderDetail);
@@ -177,7 +183,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(460, 204);
+            this.tabPage2.Size = new System.Drawing.Size(508, 313);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Other";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -192,11 +198,41 @@
             this.InvoiceEmail.UseVisualStyleBackColor = true;
             this.InvoiceEmail.Click += new System.EventHandler(this.InvoiceEmail_Click);
             // 
+            // TFDueInvoices
+            // 
+            this.TFDueInvoices.Location = new System.Drawing.Point(22, 173);
+            this.TFDueInvoices.Name = "TFDueInvoices";
+            this.TFDueInvoices.Size = new System.Drawing.Size(128, 57);
+            this.TFDueInvoices.TabIndex = 15;
+            this.TFDueInvoices.Text = "TFDueInvoices";
+            this.TFDueInvoices.UseVisualStyleBackColor = true;
+            this.TFDueInvoices.Click += new System.EventHandler(this.TFDueInvoices_Click);
+            // 
+            // TFPastDue
+            // 
+            this.TFPastDue.Location = new System.Drawing.Point(156, 173);
+            this.TFPastDue.Name = "TFPastDue";
+            this.TFPastDue.Size = new System.Drawing.Size(128, 57);
+            this.TFPastDue.TabIndex = 16;
+            this.TFPastDue.Text = "TFPastDue";
+            this.TFPastDue.UseVisualStyleBackColor = true;
+            this.TFPastDue.Click += new System.EventHandler(this.TFPastDue_Click);
+            // 
+            // TFWishList
+            // 
+            this.TFWishList.Location = new System.Drawing.Point(290, 173);
+            this.TFWishList.Name = "TFWishList";
+            this.TFWishList.Size = new System.Drawing.Size(128, 57);
+            this.TFWishList.TabIndex = 17;
+            this.TFWishList.Text = "TFWishList";
+            this.TFWishList.UseVisualStyleBackColor = true;
+            this.TFWishList.Click += new System.EventHandler(this.TFWishList_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(563, 323);
+            this.ClientSize = new System.Drawing.Size(633, 445);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cb_Owner);
@@ -230,6 +266,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button InvoiceEmail;
+        private System.Windows.Forms.Button TFWishList;
+        private System.Windows.Forms.Button TFPastDue;
+        private System.Windows.Forms.Button TFDueInvoices;
     }
 }
 

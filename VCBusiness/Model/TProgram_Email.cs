@@ -33,8 +33,8 @@ namespace VCBusiness.Model
         private string _replyToLabel;
         private string _respondLabel;
         private int _orderTypeId;
-       
-
+        private string _toAddress;
+        private string _respondToName;
 
         [BindingField("ProgramEmailId", true)]
         public int ProgramEmailId
@@ -228,7 +228,32 @@ namespace VCBusiness.Model
                 return _orderTypeId;
             }
         }
-      
+        [BindingField("ToAddress", true)]
+        public string ToAddress
+        {
+            set
+            {
+                _toAddress = value;
+            }
+            get
+            {
+                return _toAddress;
+            }
+        }
+        [BindingField("RespondToName", true)]
+        public string RespondToName
+        {
+            set
+            {
+                _respondToName = value;
+            }
+            get
+            {
+                return _respondToName;
+            }
+        }
+
+
         #endregion
 
         #region Extend Property
